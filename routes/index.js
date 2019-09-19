@@ -1,3 +1,5 @@
+const userController = require('../controllers/userController.js')
+
 module.exports = (app, passport) => {
   const authenticated = (req, res, next) => {
     if (req.isAuthenticated()) {
@@ -15,7 +17,8 @@ module.exports = (app, passport) => {
   }
 
   app.get('/', authenticated, (req, res) => res.redirect('/tweets'))
-  app.get('/tweets', authenticated, tweetController.getTweets)
+  //app.get('/tweets', authenticated, tweetController.getTweets)
 
   app.get('/signup', userController.signUpPage)
+  app.post('/signup', userController.signUp)
 }
