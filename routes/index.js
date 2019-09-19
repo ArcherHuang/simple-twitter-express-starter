@@ -28,4 +28,5 @@ module.exports = (app, passport) => {
     passport.authenticate('local', { failureRedirect: '/signin', failureFlash: true }),
     userController.signIn
   )
+  app.get('/logout', userController.logout)
 }
