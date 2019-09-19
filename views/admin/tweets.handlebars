@@ -1,0 +1,37 @@
+<h1>tweet後台</h1>
+
+<ul class="nav nav-tabs">
+  <li class="nav-item">
+    <a class="nav-link active" href="/admin/tweets">tweet</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="/admin/users">User</a>
+  </li>
+</ul>
+
+<br />
+
+<table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">user</th>
+      <th scope="col">tweet</th>
+      <th scope="col">#</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each tweets}}
+    <tr>
+      <th scope="row">{{this.id}}</th>
+      <td>{{this.User.name}}</td>
+      <td>{{this.description}}</td>
+      <td>
+        <form action="/admin/tweets/{{this.id}}?_method=DELETE" method="POST">
+          <button type="submit" class="btn btn-danger">Delete</button>
+        </form>
+      </td>
+    </tr>
+    {{/each}}
+  </tbody>
+</table>

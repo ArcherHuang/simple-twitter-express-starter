@@ -1,5 +1,6 @@
 const tweetController = require('../controllers/tweetController.js')
 const userController = require('../controllers/userController.js')
+const adminController = require('../controllers/adminController.js')
 
 module.exports = (app, passport) => {
   const authenticated = (req, res, next) => {
@@ -19,6 +20,11 @@ module.exports = (app, passport) => {
 
   app.get('/', authenticated, (req, res) => res.redirect('/tweets'))
   app.get('/tweets', authenticated, tweetController.getTweets)
+
+  app.get('/admin', authenticatedAdmin, (req, res) => res.redirect('/admin/tweets'))
+  app.get('/admin/tweets', authenticatedAdmin, adminController.getTweets)
+  app.delete('/admin/tweets/:id', authenticatedAdmin, adminController.deleteTweet)
+  app.get('/admin/users', authenticatedAdmin, adminController.getUsers)
 
   app.get('/signup', userController.signUpPage)
   app.post('/signup', userController.signUp)
