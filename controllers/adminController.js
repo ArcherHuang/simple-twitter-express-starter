@@ -22,6 +22,14 @@ const adminController = {
         return res.redirect('/admin/tweets')
       })
     })
+  },
+  getUsers: (req, res) => {
+    return User.findAll({
+      include: [Tweet, Like, { model: User, as: 'Followers' }, { model: User, as: 'Followings' }]
+    }).then((users) => {
+      console.log(users)
+      return res.render('admin/users', { users })
+    })
   }
 }
 
