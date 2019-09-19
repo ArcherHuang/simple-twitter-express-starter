@@ -14,6 +14,14 @@ const adminController = {
       })
       return res.render('admin/tweets', { tweets: data })
     })
+  },
+  deleteTweet: (req, res) => {
+    return Tweet.findByPk(req.params.id).then((tweet) => {
+      tweet.destroy().then((tweet) => {
+        req.flash('success_messages', 'tweet was successfully deleted')
+        return res.redirect('/admin/tweets')
+      })
+    })
   }
 }
 
