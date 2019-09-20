@@ -10,6 +10,13 @@ const db = require('./models')
 const app = express()
 const port = 3000
 
+// 判別開發環境
+if (process.env.NODE_ENV !== 'production') {
+  // 如果不是 production 模式
+  // 使用 dotenv 讀取 .env 檔案
+  require('dotenv').config()
+}
+
 app.engine(
   'handlebars',
   handlebars({
@@ -19,8 +26,9 @@ app.engine(
   })
 )
 app.set('view engine', 'handlebars')
-
+app.use(express.static('public'))
 app.use(bodyParser.urlencoded({ extended: true }))
+app.use(bodyParser.json())
 app.use(session({ secret: 'secret', resave: false, saveUninitialized: false }))
 app.use(passport.initialize())
 app.use(passport.session())
@@ -38,8 +46,11 @@ app.use(methodOverride('_method'))
 // use helpers.getUser(req) to replace req.user
 // use helpers.ensureAuthenticated(req) to replace req.isAuthenticated()
 
-app.listen(port, () => console.log(`Example app listening on port ${port}!`))
+app.listen(port, () => {
+  db.sequelize.sync()
+  console.log(`Example app listening on port ${port}!`)
+})
 
 require('./routes')(app, passport)
 
-//module.exports = app
+module.exports = app

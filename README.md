@@ -74,7 +74,7 @@ IMGUR_CLIENT_ID=
 
   ```
   
-  * Local 端測試
+  * Travis 端測試
   ```
   "test": {
     "username": "travis",

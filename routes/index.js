@@ -2,16 +2,20 @@ const tweetController = require('../controllers/tweetController.js')
 const userController = require('../controllers/userController.js')
 const adminController = require('../controllers/adminController.js')
 
+const multer = require('multer')
+const upload = multer({ dest: 'temp/' })
+const helpers = require('../_helpers')
+
 module.exports = (app, passport) => {
   const authenticated = (req, res, next) => {
-    if (req.isAuthenticated()) {
+    if (helpers.ensureAuthenticated(req)) {
       return next()
     }
     return res.redirect('/signin')
   }
 
   const authenticatedAdmin = (req, res, next) => {
-    if (req.isAuthenticated()) {
+    if (helpers.ensureAuthenticated(req)) {
       if (req.user.role === 'admin') return next()
       return res.redirect('/')
     }
@@ -35,4 +39,19 @@ module.exports = (app, passport) => {
     userController.signIn
   )
   app.get('/logout', userController.logout)
+
+  // 編輯使用者資訊
+  app.get('/users/:id/edit', authenticated, userController.editUser)
+  app.post('/users/:id/edit', authenticated, upload.single('avatar'), userController.putUser)
+
+  // 取得使用者相關資訊
+  app.get('/users/:id/tweets', authenticated, userController.getUser)
+  app.get('/users/:id/followings', authenticated, userController.getFollowings)
+  app.get('/users/:id/followers', authenticated, userController.getFollowers)
+  app.get('/users/:id/likes', authenticated, userController.getLike)
+
+  // follower & following
+  app.post('/followships', userController.addFollowing)
+  app.delete('/followships/:id', authenticated, userController.removeFollowing)
+
 }

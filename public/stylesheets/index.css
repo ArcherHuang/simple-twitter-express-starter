@@ -1,0 +1,4 @@
+/*滑鼠移過的效果*/
+.item:hover {
+  background-color: #FDF5E6;
+}
