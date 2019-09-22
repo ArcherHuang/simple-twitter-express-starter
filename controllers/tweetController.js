@@ -27,9 +27,21 @@ const tweetController = {
         }))
         users = users.sort((a, b) => b.FollowerCount - a.FollowerCount)
 
-        console.log(users)
         return res.render('tweets', { tweets: data, users: users })
       })
+    })
+  },
+
+  postTweet: (req, res) => {
+    if (req.body.newTweet.length <= 0 || req.body.newTweet.length > 140) {
+      req.flash('error_messages', 'tweet 長度應為 1~140 字')
+      return res.redirect('/tweets')
+    }
+    return Tweet.create({
+      UserId: req.body.userId,
+      description: req.body.newTweet
+    }).then(tweet => {
+      return res.redirect('/tweets')
     })
   }
 }

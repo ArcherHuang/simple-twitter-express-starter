@@ -1,15 +1,16 @@
 <div class="container">
   <div class="row">
     <div class="col-8">
-      <form>
+      <form action="/tweets" method="POST">
         <div class="form-group">
           <label for="addNewTweet"></label>
-          <textarea class="form-control" id="addNewTweet" rows="3" placeholder="What's on your mind? (140 characters)"
-            maxlength="140" required></textarea>
+          <textarea class="form-control" id="addNewTweet" rows="3" name="newTweet"
+            placeholder="What's on your mind? (140 characters)" maxlength="140" required></textarea>
           <div class="invalid-feedback feedback">
             Please enter your tweet
           </div>
         </div>
+        <input type="hidden" name="userId" value="{{user.id}}" />
         <button type="submit" class="btn btn-primary mb-2">Tweet</button>
       </form>
       <br>
