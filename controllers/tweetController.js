@@ -68,10 +68,23 @@ const tweetController = {
           { model: User, as: "Followings" },
         ]
       }).then(user => {
-        console.log(user.Tweets.length)
         return res.render('replies', { tweet: data, replies: replies, user: user })
       })
     })
-  }
+  },
+
+  postReply: (req, res) => {
+    if (req.body.newReply.length <= 0 || req.body.newReply.length > 140) {
+      req.flash('error_messages', 'comment 長度應為 1~140 字')
+      return res.redirect(`/tweets/${req.params.tweet_id}/replies`)
+    }
+    return Reply.create({
+      UserId: req.body.userId,
+      TweetId: req.params.tweet_id,
+      comment: req.body.newReply
+    }).then(reply => {
+      return res.redirect(`/tweets/${req.params.tweet_id}/replies`)
+    })
+  },
 }
 module.exports = tweetController
