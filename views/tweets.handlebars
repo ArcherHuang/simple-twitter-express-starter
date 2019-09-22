@@ -4,7 +4,11 @@
       <form>
         <div class="form-group">
           <label for="addNewTweet"></label>
-          <textarea class="form-control" id="addNewTweet" rows="3" placeholder="What's on your mind?"></textarea>
+          <textarea class="form-control" id="addNewTweet" rows="3" placeholder="What's on your mind? (140 characters)"
+            maxlength="140" required></textarea>
+          <div class="invalid-feedback feedback">
+            Please enter your tweet
+          </div>
         </div>
         <button type="submit" class="btn btn-primary mb-2">Tweet</button>
       </form>
@@ -61,3 +65,24 @@
     </div>
   </div>
 </div>
+
+<script>
+  let addNewTweet = document.getElementById('addNewTweet')
+  addNewTweet.addEventListener('input', displayTweetLength)
+
+  function displayTweetLength(event) {
+    let feedback = addNewTweet.nextElementSibling
+    let tweetLength = this.value.length
+
+    if (tweetLength < 140 && tweetLength > 0) {
+      feedback.innerHTML = `You have entered ${tweetLength} characters, ${140 - tweetLength} left`
+      feedback.style.display = 'inherit'
+      feedback.classList.add('text-success')
+    } else if (tweetLength === 0) {
+      feedback.innerHTML = 'Please enter your tweet'
+      feedback.classList.remove('text-success')
+    } else {
+      feedback.innerHTML = `You have entered ${tweetLength} characters!`
+    }
+  }
+</script>
