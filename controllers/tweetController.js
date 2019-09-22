@@ -44,6 +44,34 @@ const tweetController = {
       req.flash('success_messages', '成功發出一則新的 tweet!')
       return res.redirect('/tweets')
     })
+  },
+
+  getReplies: (req, res) => {
+    return Tweet.findAndCountAll({
+      where: { id: req.params.tweet_id },
+      include: [
+        User,
+        { model: Reply, include: [User], as: 'replies' },
+      ]
+    }).then(result => {
+      var data = result.rows[0]
+      data['numOfReplies'] = result.rows[0].replies.length
+
+      var replies = result.rows[0].replies
+      replies = replies.sort((a, b) => b.updatedAt - a.updatedAt)
+
+      User.findOne({
+        where: { id: data.UserId },
+        include: [
+          Tweet,
+          { model: User, as: "Followers" },
+          { model: User, as: "Followings" },
+        ]
+      }).then(user => {
+        console.log(user.Tweets.length)
+        return res.render('replies', { tweet: data, replies: replies, user: user })
+      })
+    })
   }
 }
 module.exports = tweetController
