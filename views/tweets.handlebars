@@ -1,3 +1,40 @@
-<div>
-  <h1>tweets</h1>
+<div class="container">
+  <div class="row">
+    <div class="col-8">
+      <form>
+        <div class="form-group">
+          <label for="addNewTweet"></label>
+          <textarea class="form-control" id="addNewTweet" rows="3" placeholder="What's on your mind?"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary mb-2">Tweet</button>
+      </form>
+      <br>
+      <div class="tweetsContainer">
+        {{#each tweets}}
+        <div class="tweetCard border border-secondary rounded-lg p-3 m-3">
+          <div class="row">
+            <div class="col-2">
+              <a href="/users/{{this.User.id}}/tweets">
+                <img class="" src="{{this.User.avatar}}" width="50px" height="50px">
+              </a>
+            </div>
+            <div class="col-10">
+              <h6><a href="/users/{{this.User.id}}/tweets">@{{this.User.name}}, </a>
+                <span>{{this.updatedAt}}</span></h6>
+
+              <p>{{this.description}}</p>
+              <h6><a href="/tweets/{{this.id}}/replies">Reply({{this.numOfReplies}}) </a>
+                <span>Like (N)</span>
+              </h6>
+            </div>
+          </div>
+
+        </div>
+        {{/each}}
+      </div>
+    </div>
+    <div class="col-4">
+      Popular
+    </div>
+  </div>
 </div>
