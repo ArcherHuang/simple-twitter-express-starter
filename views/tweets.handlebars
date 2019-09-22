@@ -11,7 +11,7 @@
       <br>
       <div class="tweetsContainer">
         {{#each tweets}}
-        <div class="tweetCard border border-secondary rounded-lg p-3 m-3">
+        <div class="card border border-secondary rounded-lg p-3 m-3">
           <div class="row">
             <div class="col-2">
               <a href="/users/{{this.User.id}}/tweets">
@@ -34,7 +34,30 @@
       </div>
     </div>
     <div class="col-4">
-      Popular
+      <div class="topUserContainer">
+        {{#each users}}
+        <div class="card border border-secondary rounded-lg p-3 m-3">
+          <div class="row">
+            <div class="col-4">
+              <a href="/users/{{this.id}}/tweets">
+                <img class="" src="{{his.avatar}}" width="50px" height="50px">
+              </a>
+            </div>
+            <div class="col-8">
+              <h6><a href="/users/{{this.id}}/tweets">@{{this.name}}</a></h6>
+              <h6>{{this.introduction}}</h6>
+              {{#if this.isFollowed }}
+              <form action="" method="POST" style="display: contents;"><button type="submit"
+                  class="btn btn-danger btn-sm">Unfollow</button></form>
+              {{else}}
+              <form action="" method="POST" style="display: contents;"><button type="submit"
+                  class="btn btn-primary btn-sm">Follow</button></form>
+              {{/if}}
+            </div>
+          </div>
+        </div>
+        {{/each}}
+      </div>
     </div>
   </div>
 </div>
