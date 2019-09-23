@@ -27,7 +27,7 @@ const adminController = {
     return User.findAll({
       include: [Tweet, Like, { model: User, as: 'Followers' }, { model: User, as: 'Followings' }]
     }).then((users) => {
-      console.log(users)
+      users = users.sort((a, b) => b.Tweets.length - a.Tweets.length)
       return res.render('admin/users', { users })
     })
   }

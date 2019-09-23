@@ -133,7 +133,6 @@ const userService = {
         ...user.dataValues,
         introduction: user.introduction ? user.introduction.substring(0, 50) : '',
         FollowerCount: user.Followers.length,
-        // 判斷目前登入使用者是否已追蹤該 User 物件
         isFollowed: helpers
           .getUser(req)
           .Followings.map(following => following.id)
