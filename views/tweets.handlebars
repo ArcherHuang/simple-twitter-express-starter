@@ -32,14 +32,14 @@
                 <a href="/tweets/{{this.id}}/replies">Reply({{this.numOfReplies}}) </a>
               </span>
               {{#if this.isLiked}}
-              <form action="/unlike" method="POST">
+              <form action="/unlike" method="POST" class="d-inline">
                 <input type="hidden" name="tweet_id" value="{{this.id}}" />
-                <button type="submit" class="btn btn-outline-primary">Liked ({{this.numOfLikes}})</button>
+                <button type="submit" class="button-as-link"> Liked ({{this.numOfLikes}})</button>
               </form>
               {{else}}
-              <form action="/like" method="POST">
+              <form action="/like" method="POST" class="d-inline">
                 <input type="hidden" name="tweet_id" value="{{this.id}}" />
-                <button type="submit" class="btn btn-outline-primary">Like ({{this.numOfLikes}})</button>
+                <button type="submit" class="button-as-link"> Like ({{this.numOfLikes}})</button>
               </form>
               {{/if}}
             </div>

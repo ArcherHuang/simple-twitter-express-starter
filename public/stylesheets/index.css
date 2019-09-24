@@ -8,3 +8,15 @@
   border: 1px, solid,black;
   border-radius: 10px;
 }
+
+.button-as-link{
+  background: none!important;
+  border: none;
+  padding: 0!important;
+  color:red;
+  cursor: pointer;
+}
+
+.button-as-link:hover {
+  text-decoration: underline;
+}
