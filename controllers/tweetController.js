@@ -7,12 +7,15 @@ const tweetController = {
       include: [
         User,
         { model: Reply, as: 'replies' },
+        { model: User, as: 'LikedUsers' },
       ],
       order: [['updatedAt', 'DESC']],
     }).then(result => {
       const data = result.rows.map(r => ({
         ...r.dataValues,
-        numOfReplies: r.dataValues.replies.length
+        numOfReplies: r.dataValues.replies.length,
+        numOfLikes: r.dataValues.LikedUsers.length,
+        isLiked: r.dataValues.LikedUsers.map(d => d.id).includes(req.user.id),
       }))
 
       User.findAll({
@@ -23,7 +26,7 @@ const tweetController = {
         users = users.map(user => ({
           ...user.dataValues,
           FollowerCount: user.Followers.length,
-          isFollowed: req.user.Followings.map(d => d.id).includes(user.id)
+          isFollowed: req.user.Followings.map(d => d.id).includes(user.id),
         }))
         users = users.sort((a, b) => b.FollowerCount - a.FollowerCount)
 
@@ -86,5 +89,31 @@ const tweetController = {
       return res.redirect(`/tweets/${req.params.tweet_id}/replies`)
     })
   },
+
+  postLike: (req, res) => {
+    Like.create({
+      UserId: req.user.id,
+      TweetId: req.body.tweet_id,
+    }).then(like => {
+      return res.redirect('/')
+    })
+
+  },
+  postUnlike: (req, res) => {
+    Like.findOne({
+      where: {
+        UserId: req.user.id,
+        TweetId: req.body.tweet_id,
+      }
+    }).then(like => {
+      if (like) {
+        like.destroy().then(like => {
+          return res.redirect('/')
+        })
+      } else {
+        return res.redirect('/')
+      }
+    })
+  }
 }
 module.exports = tweetController
