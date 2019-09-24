@@ -27,12 +27,12 @@
             <p>{{tweet.description}}</p>
             <span><a href="/tweets/{{tweet.id}}/replies">Reply({{tweet.numOfReplies}}) </a></span>
             {{#if tweet.isLiked}}
-            <form action="/unlike" method="POST" class="d-inline">
+            <form action="/tweets/{{tweet.id}}/unlike" method="POST" class="d-inline">
               <input type="hidden" name="tweet_id" value="{{tweet.id}}" />
               <button type="submit" class="button-as-link"> Liked ({{tweet.numOfLikes}})</button>
             </form>
             {{else}}
-            <form action="/like" method="POST" class="d-inline">
+            <form action="/tweets/{{tweet.id}}/like" method="POST" class="d-inline">
               <input type="hidden" name="tweet_id" value="{{tweet.id}}" />
               <button type="submit" class="button-as-link"> Like ({{tweet.numOfLikes}})</button>
             </form>

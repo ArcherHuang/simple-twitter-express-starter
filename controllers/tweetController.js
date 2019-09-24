@@ -98,7 +98,7 @@ const tweetController = {
   postLike: (req, res) => {
     Like.create({
       UserId: req.user.id,
-      TweetId: req.body.tweet_id,
+      TweetId: req.params.tweet_id,
     }).then(like => {
       return res.redirect('back')
     })
@@ -109,7 +109,7 @@ const tweetController = {
     Like.findOne({
       where: {
         UserId: req.user.id,
-        TweetId: req.body.tweet_id,
+        TweetId: req.params.tweet_id,
       }
     }).then(like => {
       if (like) {
