@@ -55,10 +55,13 @@ const tweetController = {
       include: [
         User,
         { model: Reply, include: [User], as: 'replies' },
+        { model: User, as: 'LikedUsers' },
       ]
     }).then(result => {
-      var data = result.rows[0]
+      let data = result.rows[0]
       data['numOfReplies'] = result.rows[0].replies.length
+      data['numOfLikes'] = result.rows[0].LikedUsers.length
+      data['isLiked'] = result.rows[0].LikedUsers
 
       var replies = result.rows[0].replies
       replies = replies.sort((a, b) => b.updatedAt - a.updatedAt)
@@ -67,10 +70,12 @@ const tweetController = {
         where: { id: data.UserId },
         include: [
           Tweet,
+          Like,
           { model: User, as: "Followers" },
           { model: User, as: "Followings" },
         ]
       }).then(user => {
+        console.log(user)
         return res.render('replies', { tweet: data, replies: replies, user: user })
       })
     })
@@ -95,10 +100,11 @@ const tweetController = {
       UserId: req.user.id,
       TweetId: req.body.tweet_id,
     }).then(like => {
-      return res.redirect('/')
+      return res.redirect('back')
     })
 
   },
+
   postUnlike: (req, res) => {
     Like.findOne({
       where: {
@@ -108,10 +114,10 @@ const tweetController = {
     }).then(like => {
       if (like) {
         like.destroy().then(like => {
-          return res.redirect('/')
+          return res.redirect('back')
         })
       } else {
-        return res.redirect('/')
+        return res.redirect('back')
       }
     })
   }

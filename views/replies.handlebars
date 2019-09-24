@@ -9,7 +9,7 @@
       <h6>Tweets: <span class="badge badge-dark">{{user.Tweets.length}}</span></h6>
       <h6>Followings: <span class="badge badge-dark">{{user.Followings.length}}</span></h6>
       <h6>Followers: <span class="badge badge-dark">{{user.Followers.length}}</span></h6>
-      <h6>Likes:</h6>
+      <h6>Likes: <span class="badge badge-dark">{{user.Likes.length}}</span></h6>
     </div>
     <div class="col-9">
       <h4>Tweet</h4>
@@ -25,8 +25,19 @@
               <span>{{tweet.updatedAt}}</span></h6>
 
             <p>{{tweet.description}}</p>
-            <h6><a href="/tweets/{{tweet.id}}/replies">Reply({{tweet.numOfReplies}}) </a>
-              <span>Like (N)</span>
+            <span><a href="/tweets/{{tweet.id}}/replies">Reply({{tweet.numOfReplies}}) </a></span>
+            {{#if tweet.isLiked}}
+            <form action="/unlike" method="POST" class="d-inline">
+              <input type="hidden" name="tweet_id" value="{{tweet.id}}" />
+              <button type="submit" class="button-as-link"> Liked ({{tweet.numOfLikes}})</button>
+            </form>
+            {{else}}
+            <form action="/like" method="POST" class="d-inline">
+              <input type="hidden" name="tweet_id" value="{{tweet.id}}" />
+              <button type="submit" class="button-as-link"> Like ({{tweet.numOfLikes}})</button>
+            </form>
+            {{/if}}
+
             </h6>
           </div>
         </div>
