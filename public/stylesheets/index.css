@@ -1,10 +1,55 @@
+/* --- Default  --- */
+a {
+  color: #1ea1f2;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+/* --- main. navbar  --- */
+body {
+  background-color: #15202b;
+}
+
+#tweet-navbar {
+  background-color: #223344;
+}
+
+#tweet-navbar > a {
+  color: #fff;
+  font-family: 'Pacifico', cursive;
+}
+
+#tweet-navbar > a > img {
+  width: 25px;
+  margin-bottom: 8px;
+}
+
+.hi {
+  color: #fff;
+}
+
+.navbar-menu {
+  color: #fff;
+}
+
+.dropdown-menu {
+  background-color: #223344;
+}
+
+.dropdown-item {
+  color: #1ea1f2;
+}
+
+/*-----------------------------------------*/
 /*滑鼠移過的效果*/
 .item:hover {
-  background-color: #FDF5E6;
+  background-color: #fdf5e6;
 }
 
 /* tweets 頁面的 CSS */
 .card {
-  border: 1px, solid,black;
+  border: 1px, solid, black;
   border-radius: 10px;
 }
