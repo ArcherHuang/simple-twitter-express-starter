@@ -59,7 +59,7 @@
           <a href="/users/{{this.User.id}}/tweets">@{{this.User.name}},</a>
           <p class="text-primary d-inline-block"> {{moment this.createdAt}}</p>
           <p>{{this.description}}</p>
-          <a href="/tweets/{{this.id}}/replies" class="text-primary pr-2">Reply({{this.Replies.length}})</a>
+          <a href="/tweets/{{this.id}}/replies" class="text-primary pr-2">Reply({{this.replies.length}})</a>
 
           {{!-- 判斷此則 tweet 是否有帳號擁有者 like 過與否 --}}
           {{#if isLiked}}

@@ -20,7 +20,13 @@ const userService = {
         Tweet,
         {
           model: Tweet,
-          as: 'LikedTweets'
+          as: 'LikedTweets',
+          include: [
+            {
+              model: Reply,
+              as: 'replies'
+            },
+          ]
         },
         {
           model: User,
