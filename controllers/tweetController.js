@@ -17,19 +17,23 @@ const tweetController = {
           ...r.dataValues,
           numOfReplies: r.dataValues.replies.length,
           numOfLikes: r.dataValues.LikedUsers.length,
-          isLiked: r.dataValues.LikedUsers.map(d => d.id).includes(helpers.getUser(req).id) ? true : false
+          isLiked: r.dataValues.LikedUsers.map(d => d.id).includes(helpers.getUser(req).id)
         }))
 
         User.findAll({
           include: [
-            { model: User, as: 'Followers' }
+            { model: User, as: 'Followers' },
+            { model: User, as: 'Followings' },
           ]
         }).then(users => {
           users = users.map(user => ({
             ...user.dataValues,
             FollowerCount: user.Followers.length,
-            isFollowed: helpers.getUser(req).Followings.map(d => d.id).includes(helpers.getUser(req).id) ? true : false
+            isFollowed: helpers.getUser(req).Followings.map(d => d.id).includes(user.id),
+            // isFollowed: req.user.Followings.map(d => d.id).includes(user.id),
           }))
+          console.log(helpers.getUser(req))
+          console.log(helpers.getUser(req).Followings)
           users = users.sort((a, b) => b.FollowerCount - a.FollowerCount)
           return res.render('tweets', { tweets: data, users: users })
         })

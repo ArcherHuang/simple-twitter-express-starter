@@ -63,11 +63,13 @@
               <h6><a href="/users/{{this.id}}/tweets">@{{this.name}}</a></h6>
               <h6>{{this.introduction}}</h6>
               {{#if this.isFollowed }}
-              <form action="" method="POST" style="display: contents;"><button type="submit"
-                  class="btn btn-danger btn-sm">Unfollow</button></form>
+              <form action="/followships/{{this.id}}?_method=DELETE" method="POST" style="display: contents;">
+
+                <button type="submit" class="btn btn-danger btn-sm">Unfollow</button></form>
               {{else}}
-              <form action="" method="POST" style="display: contents;"><button type="submit"
-                  class="btn btn-primary btn-sm">Follow</button></form>
+              <form action="/followships" method="POST" style="display: contents;">
+                <input type="hidden" name="id" value="{{this.id}}" />
+                <button type="submit" class="btn btn-primary btn-sm">Follow</button></form>
               {{/if}}
             </div>
           </div>
