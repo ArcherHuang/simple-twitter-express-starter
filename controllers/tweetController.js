@@ -38,13 +38,13 @@ const tweetController = {
   },
 
   postTweet: (req, res) => {
-    // if (req.body.newTweet.length <= 0 || req.body.newTweet.length > 140) {
-    //   req.flash('error_messages', 'tweet 長度應為 1~140 字')
-    //   return res.redirect('/tweets')
-    // }
+    if (req.body.description.length <= 0 || req.body.description.length > 140) {
+      req.flash('error_messages', 'tweet 長度應為 1~140 字')
+      return res.redirect('/tweets')
+    }
     return Tweet.create({
       UserId: helpers.getUser(req).id,
-      description: req.body.newTweet
+      description: req.body.description
     }).then(tweet => {
       req.flash('success_messages', '成功發出一則新的 tweet!')
       return res.redirect('/tweets')

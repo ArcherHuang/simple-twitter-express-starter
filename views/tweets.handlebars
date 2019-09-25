@@ -3,8 +3,8 @@
     <div class="col-8">
       <form action="/tweets" method="POST">
         <div class="form-group">
-          <label for="addNewTweet"></label>
-          <textarea class="form-control" id="addNewTweet" rows="3" name="newTweet"
+          <label for="description"></label>
+          <textarea class="form-control" id="description" rows="3" name="description"
             placeholder="What's on your mind? (140 characters)" maxlength="140" required></textarea>
           <div class="invalid-feedback feedback">
             Please enter your tweet
@@ -79,7 +79,7 @@
 </div>
 
 <script>
-  let addNewTweet = document.getElementById('addNewTweet')
+  let addNewTweet = document.getElementById('description')
   addNewTweet.addEventListener('input', displayTweetLength)
 
   function displayTweetLength(event) {
