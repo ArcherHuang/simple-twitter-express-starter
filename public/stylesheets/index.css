@@ -1,4 +1,9 @@
 /* --- Default  --- */
+body {
+  background-color: #15202b;
+  font-family: 'Archivo', sans-serif;
+}
+
 a {
   color: #1ea1f2;
 }
@@ -7,11 +12,53 @@ a:hover {
   text-decoration: none;
 }
 
-/* --- main. navbar  --- */
-body {
-  background-color: #15202b;
+h1,
+h3 {
+  font-family: 'Paytone One', sans-serif;
+  color: #fff;
 }
 
+.btn-round {
+  font-family: 'Paytone One', sans-serif;
+  text-align: center;
+  border-radius: 20px;
+  color: #1ea1f2;
+  border: 2px solid #1ea1f2;
+}
+
+.btn-circle {
+  width: 45px;
+  height: 45px;
+  line-height: 45px;
+  text-align: center;
+  padding: 0;
+  border-radius: 50%;
+}
+
+.btn-circle i {
+  position: relative;
+  top: -1px;
+}
+
+.btn-circle-sm {
+  width: 35px;
+  height: 35px;
+  line-height: 35px;
+  font-size: 0.9rem;
+}
+
+.user-img {
+  width: 60px;
+  height: 60px;
+  border-radius: 30px;
+}
+
+.frame {
+  padding: 0;
+  width: 100%;
+}
+
+/* --- main. navbar  --- */
 #tweet-navbar {
   background-color: #223344;
 }
@@ -42,14 +89,57 @@ body {
   color: #1ea1f2;
 }
 
+/* --- tweets --- */
+.head-title {
+  width: 100%;
+  border: 1px solid #223344;
+  padding: 20px 0 5px 20px;
+}
+
+.add-tweet-label,
+#add-tweet-input {
+  background-color: #15202b;
+  border: none;
+}
+
+.add-tweet {
+  border: 1px solid #223344;
+  border-bottom: 25px solid #223344;
+}
+
+/* --- tweet card --- */
+.tweet-card {
+  border: 1px solid #223344;
+}
+
+.tweet-card-icon {
+  color: #5480ab;
+}
+
+/* --- users--- */
+.top-users-title {
+  width: 100%;
+  padding: 20px 0 5px 20px;
+}
+
+.top-users {
+  border-radius: 30px;
+}
+
+.more {
+  color: #1ea1f2;
+  font-weight: bold;
+  background-color: #192633;
+}
+
+/* --- user card --- */
+.user-card {
+  border-bottom: 2px solid #436689;
+  background-color: #192633;
+}
+
 /*-----------------------------------------*/
 /*滑鼠移過的效果*/
 .item:hover {
   background-color: #fdf5e6;
-}
-
-/* tweets 頁面的 CSS */
-.card {
-  border: 1px, solid, black;
-  border-radius: 10px;
 }
