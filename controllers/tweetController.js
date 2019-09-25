@@ -75,7 +75,6 @@ const tweetController = {
           { model: User, as: "Followings" },
         ]
       }).then(user => {
-        console.log(user)
         return res.render('replies', { tweet: data, replies: replies, user: user })
       })
     })
