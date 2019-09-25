@@ -87,7 +87,7 @@ const userService = {
     await Promise.all(promises)
 
     userFollowings = userFollowings.sort((a, b) => {
-      return a.followshipCreatedTime - b.followshipCreatedTime
+      return b.followshipCreatedTime - a.followshipCreatedTime
     })
 
     return callback({ profile: user, userFollowings })
