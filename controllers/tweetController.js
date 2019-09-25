@@ -11,27 +11,47 @@ const tweetController = {
       ],
       order: [['updatedAt', 'DESC']],
     }).then(result => {
-      const data = result.rows.map(r => ({
-        ...r.dataValues,
-        numOfReplies: r.dataValues.replies.length,
-        numOfLikes: r.dataValues.LikedUsers.length,
-        isLiked: r.dataValues.LikedUsers.map(d => d.id).includes(req.user.id),
-      }))
-
-      User.findAll({
-        include: [
-          { model: User, as: 'Followers' }
-        ]
-      }).then(users => {
-        users = users.map(user => ({
-          ...user.dataValues,
-          FollowerCount: user.Followers.length,
-          isFollowed: req.user.Followings.map(d => d.id).includes(user.id),
+      if (req.user) {
+        const data = result.rows.map(r => ({
+          ...r.dataValues,
+          numOfReplies: r.dataValues.replies.length,
+          numOfLikes: r.dataValues.LikedUsers.length,
+          isLiked: r.dataValues.LikedUsers.map(d => d.id).includes(req.user.id) ? true : false
         }))
-        users = users.sort((a, b) => b.FollowerCount - a.FollowerCount)
 
-        return res.render('tweets', { tweets: data, users: users })
-      })
+        User.findAll({
+          include: [
+            { model: User, as: 'Followers' }
+          ]
+        }).then(users => {
+          users = users.map(user => ({
+            ...user.dataValues,
+            FollowerCount: user.Followers.length,
+            isFollowed: req.user.Followings.map(d => d.id).includes(user.id) ? true : false
+          }))
+          users = users.sort((a, b) => b.FollowerCount - a.FollowerCount)
+          return res.render('tweets', { tweets: data, users: users })
+        })
+      } else {
+        const data = result.rows.map(r => ({
+          ...r.dataValues,
+          numOfReplies: r.dataValues.replies.length,
+          numOfLikes: r.dataValues.LikedUsers.length,
+        }))
+
+        User.findAll({
+          include: [
+            { model: User, as: 'Followers' }
+          ]
+        }).then(users => {
+          users = users.map(user => ({
+            ...user.dataValues,
+            FollowerCount: user.Followers.length,
+          }))
+          users = users.sort((a, b) => b.FollowerCount - a.FollowerCount)
+          return res.render('tweets', { tweets: data, users: users })
+        })
+      }
     })
   },
 
@@ -80,18 +100,21 @@ const tweetController = {
     })
   },
 
-  postReply: (req, res) => {
-    if (req.body.newReply.length <= 0 || req.body.newReply.length > 140) {
+  postReply: async (req, res) => {
+    if (!req.body.newReply) {
+      return res.redirect('/')
+    } else if (req.body.newReply.length <= 0 || req.body.newReply.length > 140) {
       req.flash('error_messages', 'comment 長度應為 1~140 字')
       return res.redirect(`/tweets/${req.params.tweet_id}/replies`)
+    } else {
+      await Reply.create({
+        UserId: req.body.userId,
+        TweetId: req.params.tweet_id,
+        comment: req.body.newReply
+      }).then(reply => {
+        return res.redirect(`/tweets/${req.params.tweet_id}/replies`)
+      })
     }
-    return Reply.create({
-      UserId: req.body.userId,
-      TweetId: req.params.tweet_id,
-      comment: req.body.newReply
-    }).then(reply => {
-      return res.redirect(`/tweets/${req.params.tweet_id}/replies`)
-    })
   },
 
   postLike: (req, res) => {
