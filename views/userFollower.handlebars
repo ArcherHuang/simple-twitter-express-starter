@@ -31,11 +31,12 @@
     <a href="/users/{{user.id}}/edit" class="btn btn-primary">Edit Profile</a>
     {{else}}
     {{#if profile.isFollowed }}
-    <form action="/followships/{{profile.followshipId}}?_method=DELETE" method="POST" style="display: contents;">
+    <form action="/followships/{{profile.id}}?_method=DELETE" method="POST" style="display: contents;">
       <button type="submit" class="btn btn-outline-danger">UnFollow</button></form>
     {{else}}
     <form action="/followships" method="POST" style="display: contents;">
-      <input type="number" name="followingId" value="{{profile.id}}" class="d-none">
+      <input type="number" name="id" value="{{profile.id}}" class="d-none">
+      {{!-- <input type="number" name="followingId" value="{{profile.id}}" class="d-none"> --}}
       <button type="submit" class="btn btn-outline-primary">Follow</button></form>
     {{/if}}
     {{/ifCond}}
@@ -61,12 +62,12 @@
 
                 {{else}}
                 {{#if this.isFollowed }}
-                <form action="/followships/{{this.followshipId}}?_method=DELETE" method="POST"
-                  style="display: contents;">
+                <form action="/followships/{{this.id}}?_method=DELETE" method="POST" style="display: contents;">
                   <button type="submit" class="btn btn-outline-danger">UnFollow</button></form>
                 {{else}}
                 <form action="/followships" method="POST" style="display: contents;">
-                  <input type="number" name="followingId" value="{{this.id}}" class="d-none">
+                  <input type="number" name="id" value="{{this.id}}" class="d-none">
+                  {{!-- <input type="number" name="followingId" value="{{this.id}}" class="d-none"> --}}
                   <button type="submit" class="btn btn-outline-primary">Follow</button></form>
                 {{/if}}
                 {{/ifCond}}

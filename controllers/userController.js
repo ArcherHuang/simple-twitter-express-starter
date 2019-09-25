@@ -106,7 +106,12 @@ const userController = {
   addFollowing: (req, res) => {
 
     userService.addFollowing(req, res, (data) => {
-      return res.redirect('back')
+      // return res.redirect('back')
+      if (data['status'] === 'fail') {
+        return res.redirect('back')
+      } else if (data['status'] === 'success') {
+        return res.render('userFollowing')
+      }
     })
 
   },

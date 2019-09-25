@@ -170,31 +170,43 @@ const userService = {
 
   addFollowing: (req, res, callback) => {
 
-    if (helpers.getUser(req).id !== parseInt(req.body.followingId)) {
+    // if (helpers.getUser(req).id !== parseInt(req.body.followingId)) {
+    if (helpers.getUser(req).id !== parseInt(req.body.id)) {
       Followship.create({
         followerId: helpers.getUser(req).id,
-        followingId: parseInt(req.body.followingId)
+        followingId: parseInt(req.body.id)
+        // followingId: parseInt(req.body.followingId)
       })
-      return callback({ status: 'success', message: 'not self' })
+      return callback({ status: 'fail', message: 'not self' })
     } else {
-      return callback({ status: 'success', message: 'sel' })
+      return callback({ status: 'success', message: 'self' })
     }
 
   },
 
-  removeFollowing: (req, res, callback) => {
-
-    return Followship.findOne({
+  removeFollowing: async (req, res, callback) => {
+    console.log(`111followerId; ${helpers.getUser(req).id}, followingId: ${req.params.followingId}`)
+    await Followship.destroy({
       where: {
-        id: req.params.id
+        followerId: helpers.getUser(req).id,
+        followingId: req.params.followingId
       }
     })
-      .then((followship) => {
-        followship.destroy()
-          .then((followship) => {
-            return callback({ status: 'success', message: '' })
-          })
-      })
+    return callback({ status: 'success', message: '' })
+
+    // return Followship.findOne({
+    //   where: {
+    //     // id: req.params.id
+    //     followerId: helpers.getUser(req).id,
+    //     followingId: req.params.followingId
+    //   }
+    // })
+    //   .then((followship) => {
+    //     followship.destroy()
+    //       .then((followship) => {
+    //         return callback({ status: 'success', message: '' })
+    //       })
+    //   })
   },
 
   putUser: (req, res, callback) => {
