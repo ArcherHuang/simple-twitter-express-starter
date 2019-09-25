@@ -12,12 +12,12 @@ const tweetController = {
       ],
       order: [['updatedAt', 'DESC']],
     }).then(result => {
-      if (req.user) {
+      if (helpers.getUser(req)) {
         const data = result.rows.map(r => ({
           ...r.dataValues,
           numOfReplies: r.dataValues.replies.length,
           numOfLikes: r.dataValues.LikedUsers.length,
-          isLiked: r.dataValues.LikedUsers.map(d => d.id).includes(req.user.id) ? true : false
+          isLiked: r.dataValues.LikedUsers.map(d => d.id).includes(helpers.getUser(req).id) ? true : false
         }))
 
         User.findAll({
@@ -28,25 +28,7 @@ const tweetController = {
           users = users.map(user => ({
             ...user.dataValues,
             FollowerCount: user.Followers.length,
-            isFollowed: req.user.Followings.map(d => d.id).includes(user.id) ? true : false
-          }))
-          users = users.sort((a, b) => b.FollowerCount - a.FollowerCount)
-          return res.render('tweets', { tweets: data, users: users })
-        })
-      } else {
-        const data = result.rows.map(r => ({
-          ...r.dataValues,
-          numOfReplies: r.dataValues.replies.length,
-          numOfLikes: r.dataValues.LikedUsers.length,
-        }))
-        User.findAll({
-          include: [
-            { model: User, as: 'Followers' }
-          ]
-        }).then(users => {
-          users = users.map(user => ({
-            ...user.dataValues,
-            FollowerCount: user.Followers.length,
+            isFollowed: helpers.getUser(req).Followings.map(d => d.id).includes(helpers.getUser(req).id) ? true : false
           }))
           users = users.sort((a, b) => b.FollowerCount - a.FollowerCount)
           return res.render('tweets', { tweets: data, users: users })
