@@ -1,5 +1,6 @@
 const db = require('../models')
 const { Tweet, User, Like, Reply } = db
+const helpers = require('../_helpers')
 
 const tweetController = {
   getTweets: (req, res) => {
@@ -100,21 +101,30 @@ const tweetController = {
     })
   },
 
-  postReply: async (req, res) => {
-    if (!req.body.newReply) {
-      return res.redirect('/')
-    } else if (req.body.newReply.length <= 0 || req.body.newReply.length > 140) {
-      req.flash('error_messages', 'comment 長度應為 1~140 字')
-      return res.redirect(`/tweets/${req.params.tweet_id}/replies`)
-    } else {
-      await Reply.create({
-        UserId: req.body.userId,
-        TweetId: req.params.tweet_id,
-        comment: req.body.newReply
-      }).then(reply => {
-        return res.redirect(`/tweets/${req.params.tweet_id}/replies`)
-      })
-    }
+  postReply: (req, res) => {
+    // if (!req.body.newReply) {
+    //   res.redirect(`/tweets/${req.params.tweet_id}/replies`)
+    // }
+    // else if (req.body.newReply.length <= 0 || req.body.newReply.length > 140) {
+    //   req.flash('error_messages', 'comment 長度應為 1~140 字')
+    //   res.redirect(`/tweets/${req.params.tweet_id}/replies`)
+    // }
+    // else {
+    //   Reply.create({
+    //     UserId: helpers.getUser(req).id,
+    //     TweetId: req.params.tweet_id,
+    //     comment: req.body.newReply
+    //   }).then(reply => {
+    //     res.redirect(`/tweets/${req.params.tweet_id}/replies`)
+    //   })
+    // }
+    return Reply.create({
+      UserId: helpers.getUser(req).id,
+      TweetId: req.params.tweet_id,
+      comment: req.body.newReply
+    }).then(reply => {
+      res.redirect(`/tweets/${req.params.tweet_id}/replies`)
+    })
   },
 
   postLike: (req, res) => {
