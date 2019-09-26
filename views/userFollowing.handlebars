@@ -60,7 +60,7 @@
       {{!-- user card --}}
       {{#each userFollowings}}
       <div class="col-lg-6 col-12 p-2">
-        <div class="following-card w-100 shadow-sm mt-1 p-2 item">
+        <div class="follow-card w-100 shadow mt-1 p-2 item">
           <div class="row no-gutters">
             <div class="col-3 text-center">
               <object class="profile-img" data="https://via.placeholder.com/50" type="image/png">
@@ -70,12 +70,8 @@
             <div class="col-9">
               <div class="d-flex justify-content-between">
                 <a href="/users/{{this.id}}/tweets">@{{this.name}}</a>
-
-                <div class="">
-                  <span class="badge following-badge"
-                    style="font-size: 1em; top:-42px;left:147px">{{this.FollowerCount}}
-                    位粉絲</span>
-                </div>
+                <span class="badge follow-badge" style="font-size: 1em; top:-42px;left:147px">{{this.FollowerCount}}
+                  位粉絲</span>
               </div>
               <div class="text-light mt-1">
                 {{this.introduction}}

@@ -63,6 +63,9 @@ h4 {
   font-size: 10px;
   color: #9197a3;
 }
+.item:hover {
+  background-color: #223344;
+}
 
 /* --- main. navbar  --- */
 #tweet-navbar {
@@ -165,13 +168,13 @@ h4 {
   background-color: #192633;
 }
 
-/* --- following user card --- */
+/* --- follow user card --- */
 
-.following-card {
+.follow-card {
   border-radius: 10px;
   background-color: #192633;
 }
 
-.following-badge {
+.follow-badge {
   background-color: #1ea1f2;
 }
