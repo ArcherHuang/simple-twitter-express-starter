@@ -6,7 +6,7 @@ const adminController = {
     return Tweet.findAll({ include: User }).then((tweets) => {
       const data = tweets.map((r) => {
         let data = r.dataValues.description
-        data = data.length < 50 ? data : data.substring(0, 50) + '...'
+        data = data ? (data.length < 50 ? data : data.substring(0, 50) + '...') : null
         return {
           ...r.dataValues,
           description: data
