@@ -1,5 +1,5 @@
 const db = require('../models')
-const { Tweet, User, Like } = db
+const { Tweet, User, Like, Reply } = db
 
 const adminController = {
   getTweets: (req, res) => {
@@ -18,8 +18,20 @@ const adminController = {
   deleteTweet: (req, res) => {
     return Tweet.findByPk(req.params.id).then((tweet) => {
       tweet.destroy().then((tweet) => {
-        req.flash('success_messages', 'tweet was successfully deleted')
-        return res.redirect('/admin/tweets')
+        Like.destroy({
+          where: {
+            TweetId: req.params.id
+          }
+        }).then(like => {
+          Reply.destroy({
+            where: {
+              TweetId: req.params.id
+            }
+          }).then(reply => {
+            req.flash('success_messages', 'tweet was successfully deleted')
+            return res.redirect('/admin/tweets')
+          })
+        })
       })
     })
   },
