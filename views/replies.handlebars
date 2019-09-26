@@ -7,7 +7,7 @@
         </object>
       </a>
       <a href="/users/{{tweet.User.id}}">
-        <h3>{{user.name}}</h3>
+        <h3>{{profile.name}}</h3>
       </a>
     </div>
     <p class="text-light">{{tweet.User.introduction}}</p>
@@ -15,25 +15,42 @@
     <div class="aside-menu">
       <h5>
         <a class="text-light" href="/users/{{tweet.User.id}}/tweets">Tweets <span
-            class="badge profile-badge">{{user.Tweets.length}}</span>
+            class="badge profile-badge">{{profile.Tweets.length}}</span>
         </a>
       </h5>
       <h5>
         <a class="text-light" href="/users/{{tweet.User.id}}/followings">Following <span
-            class="badge profile-badge">{{user.Followings.length}}</span>
+            class="badge profile-badge">{{profile.Followings.length}}</span>
         </a>
       </h5>
       <h5>
         <a class="text-light" href="/users/{{tweet.User.id}}/followers">Follower <span
-            class="badge profile-badge">{{user.Followers.length}}</span>
+            class="badge profile-badge">{{profile.Followers.length}}</span>
         </a>
       </h5>
       <h5>
         <a class="text-light" href="/users/{{tweet.User.id}}/likes">
           Like
-          <span class="badge profile-badge">{{user.Likes.length}}</span>
+          <span class="badge profile-badge">{{profile.Likes.length}}</span>
         </a>
       </h5>
+    </div>
+    <br />
+    <div class="text-center">
+      {{#ifCond user.id profile.id}}
+      <a href="/users/{{user.id}}/edit" class="btn btn-outline-primary btn-round">Edit Profile</a>
+      {{else}}
+
+      {{#if profile.isFollowed }}
+      <form action="/followships/{{profile.id}}?_method=DELETE" method="POST" style="display: contents;">
+        <button type="submit" class="btn btn-outline-danger btn-round">Unfollow</button></form>
+      {{else}}
+      <form action="/followships" method="POST" style="display: contents;">
+        <input type="number" name="id" value="{{profile.id}}" class="d-none">
+        <button type="submit" class="btn btn-outline-primary btn-round">Follow</button>
+      </form>
+      {{/if}}
+      {{/ifCond}}
     </div>
 
   </div>
