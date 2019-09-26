@@ -10,26 +10,28 @@
     <p class="text-light">{{profile.introduction}}</p>
 
     <br />
-    <h5>
-      <a class="text-light" href="/users/{{profile.id}}/tweets">Tweets <span
-          class="badge profile-badge">{{profile.Tweets.length}}</span>
-      </a>
-    </h5>
-    <h5>
-      <a class="text-light" href="/users/{{profile.id}}/followings">Following <span
-          class="badge profile-badge">{{profile.Followings.length}}</span>
-      </a>
-    </h5>
-    <h5>
-      <a class="text-light" href="/users/{{profile.id}}/followers">Follower <span
-          class="badge profile-badge">{{profile.Followers.length}}</span>
-      </a>
-    </h5>
-    <h5>
-      <a class="text-light" href="/users/{{profile.id}}/likes">Like <span
-          class="badge profile-badge">{{profile.LikedTweets.length}}</span>
-      </a>
-    </h5>
+    <div class="aside-menu">
+      <h5>
+        <a class="text-light" href="/users/{{profile.id}}/tweets">Tweets <span
+            class="badge profile-badge">{{profile.Tweets.length}}</span>
+        </a>
+      </h5>
+      <h5>
+        <a class="text-light" href="/users/{{profile.id}}/followings">Following <span
+            class="badge profile-badge">{{profile.Followings.length}}</span>
+        </a>
+      </h5>
+      <h5>
+        <a class="text-light" href="/users/{{profile.id}}/followers">Follower <span
+            class="badge profile-badge">{{profile.Followers.length}}</span>
+        </a>
+      </h5>
+      <h5>
+        <a class="text-light" href="/users/{{profile.id}}/likes">Like <span
+            class="badge profile-badge">{{profile.LikedTweets.length}}</span>
+        </a>
+      </h5>
+    </div>
     <br />
     {{#ifCond profile.id user.id}}
     <a href="/users/{{profile.id}}/edit" class="btn btn-primary">Edit Profile</a>

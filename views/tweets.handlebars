@@ -2,20 +2,20 @@
   <div class="row frame">
     <div class="col-md-7 frame">
       {{!-- POST tweet --}}
-      <form action="/tweets" method="POST" class="add-tweet">
+      <form action="/tweets" method="POST" class="comment">
         <div class="form-group">
           <div class="head-title">
             <h3>Home</h3>
           </div>
           <div class="input-group">
             <div class="input-group-prepend">
-              <span class="add-tweet-label input-group-text d-flex align-items-start">
+              <span class="comment-label input-group-text d-flex align-items-start">
                 <object class="user-img" data="https://via.placeholder.com/50" type="image/png">
                   <img class="user-img" src="{{this.User.avatar}}">
                 </object>
               </span>
             </div>
-            <textarea class="form-control" id="add-tweet-input" rows="3" name="newTweet"
+            <textarea class="form-control" id="comment-input" rows="3" name="newTweet"
               placeholder="What's on your mind? ...140 characters" maxlength="140" required></textarea>
             <div class="invalid-feedback feedback">
               Please enter your tweet
@@ -53,11 +53,11 @@
                   <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp; {{this.numOfReplies}}
                 </a>
               </span>
-              {{#if this.isLiked}}
+              {{#if this.User.isLiked}}
               <form action="/tweets/{{this.id}}/unlike" method="POST" class="d-inline ml-5">
                 <input type="hidden" name="tweet_id" value="{{this.id}}" />
                 <button type="submit" class="tweet-card-icon">
-                  <i class="fa fa-heart-o" aria-hidden="true"></i>&nbsp; {{this.numOfLikes}}
+                  <i class="fa fa-heart-o text-danger" aria-hidden="true"></i>&nbsp; {{this.numOfLikes}}
                 </button>
               </form>
               {{else}}
@@ -122,7 +122,7 @@
 </div>
 
 <script>
-  let addNewTweet = document.getElementById('addNewTweet')
+  let addNewTweet = document.getElementById('comment-input')
   addNewTweet.addEventListener('input', displayTweetLength)
 
   function displayTweetLength(event) {

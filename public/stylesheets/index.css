@@ -13,7 +13,8 @@ a:hover {
 }
 
 h1,
-h3 {
+h3,
+h4 {
   font-family: 'Paytone One', sans-serif;
   color: #fff;
 }
@@ -101,13 +102,13 @@ h3 {
   padding: 20px 0 5px 20px;
 }
 
-.add-tweet-label,
-#add-tweet-input {
+.comment-label,
+#comment-input {
   background-color: #15202b;
   border: none;
 }
 
-.add-tweet {
+.comment {
   border: 1px solid #223344;
   border-bottom: 25px solid #223344;
 }
@@ -157,4 +158,9 @@ h3 {
 
 .profile-badge {
   background-color: #436689;
+}
+
+/* --- reply card --- */
+.reply-card {
+  background-color: #192633;
 }
