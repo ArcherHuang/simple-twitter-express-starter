@@ -2,9 +2,15 @@
   <div class="col-md-3 mb-5">
     <div class="text-center mt-5">
       <a href="/users/{{profile.id}}/tweets">
-        <object class="profile-img" data="https://via.placeholder.com/150" type="image/png">
+        {{!-- <object class="profile-img" data="https://via.placeholder.com/150" type="image/png">
           <img class="user-img" src="{{profile.avatar}}">
+        </object> --}}
+        {{#if profile.avatar }}
+        <img src="{{profile.avatar}}" class="card-img" alt="avatar" style="width: 150px; height: 150px;">
+        {{else}}
+        <object data="https://via.placeholder.com/300" type="image/png" style="width:100%;">
         </object>
+        {{/if}}
       </a>
       <a href="/users/{{profile.id}}">
         <h3>{{profile.name}}</h3>
