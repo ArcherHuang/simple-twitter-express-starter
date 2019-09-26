@@ -42,7 +42,7 @@
 
       {{#if profile.isFollowed }}
       <form action="/followships/{{profile.id}}?_method=DELETE" method="POST" style="display: contents;">
-        <button type="submit" class="btn btn-outline-danger btn-round">UnFollow</button></form>
+        <button type="submit" class="btn btn-outline-danger btn-round">Unfollow</button></form>
       {{else}}
       <form action="/followships" method="POST" style="display: contents;">
         <input type="number" name="id" value="{{profile.id}}" class="d-none">
