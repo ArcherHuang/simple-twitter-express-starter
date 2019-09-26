@@ -58,6 +58,11 @@ h3 {
   width: 100%;
 }
 
+.time-text {
+  font-size: 10px;
+  color: #9197a3;
+}
+
 /* --- main. navbar  --- */
 #tweet-navbar {
   background-color: #223344;
@@ -140,8 +145,16 @@ h3 {
   background-color: #192633;
 }
 
-/*-----------------------------------------*/
-/*滑鼠移過的效果*/
-.item:hover {
-  background-color: #fdf5e6;
+/* --- profile --- */
+.profile-img {
+  border-radius: 50%;
+  background-color: #192633;
+}
+
+.profile-text {
+  color: #1ea1f2;
+}
+
+.profile-badge {
+  background-color: #436689;
 }

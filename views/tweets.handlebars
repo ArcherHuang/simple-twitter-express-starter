@@ -44,7 +44,7 @@
             <div class="col-10">
               <div>
                 <a href="/users/{{this.User.id}}/tweets">@{{this.User.name}}, </a>
-                <span>{{this.updatedAt}}</span>
+                <span class="time-text">{{moment this.updatedAt}}</span>
               </div>
 
               <p class="text-light">{{this.description}}</p>
@@ -84,7 +84,7 @@
       <ul class="top-users list-group">
         {{#each users}}
         {{!-- User card --}}
-        <li class="list-group-item user-card p-3 ml-3">
+        <li class="list-group-item user-card shadow p-3 ml-3">
           <div class="row">
             <div class="col-3">
               <a href="/users/{{this.id}}/tweets">
@@ -105,7 +105,7 @@
                 </form>
                 {{else}}
                 <form action="" method="POST" style="display: contents;">
-                  <button type="submit" class="btn btn-outline-primary btn-round btn-sm">
+                  <button type="submit" class="btn btn-outline-dark btn-round btn-sm">
                     Follow
                   </button>
                 </form>
