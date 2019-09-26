@@ -114,6 +114,8 @@ h3 {
 
 .tweet-card-icon {
   color: #5480ab;
+  background-color: #15202b;
+  border: none;
 }
 
 /* --- users--- */

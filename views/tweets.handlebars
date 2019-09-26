@@ -42,19 +42,32 @@
               </a>
             </div>
             <div class="col-10">
-              <div><a href="/users/{{this.User.id}}/tweets">@{{this.User.name}}, </div>
-              <span>{{this.updatedAt}}</span>
+              <div>
+                <a href="/users/{{this.User.id}}/tweets">@{{this.User.name}}, </a>
+                <span>{{this.updatedAt}}</span>
+              </div>
+
               <p class="text-light">{{this.description}}</p>
               <span>
                 <a href="/tweets/{{this.id}}/replies" class="tweet-card-icon">
                   <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp; {{this.numOfReplies}}
                 </a>
               </span>
-              <span class="ml-5">
-                <a href="/tweets/{{this.id}}/likes" class="tweet-card-icon">
+              {{#if this.isLiked}}
+              <form action="/tweets/{{this.id}}/unlike" method="POST" class="d-inline ml-5">
+                <input type="hidden" name="tweet_id" value="{{this.id}}" />
+                <button type="submit" class="tweet-card-icon">
                   <i class="fa fa-heart-o" aria-hidden="true"></i>&nbsp; {{this.numOfLikes}}
-                </a>
-              </span>
+                </button>
+              </form>
+              {{else}}
+              <form action="/tweets/{{this.id}}/like" method="POST" class="d-inline ml-5">
+                <input type="hidden" name="tweet_id" value="{{this.id}}" />
+                <button type="submit" class="tweet-card-icon">
+                  <i class="fa fa-heart-o" aria-hidden="true"></i>&nbsp; {{this.numOfLikes}}
+                </button>
+              </form>
+              {{/if}}
             </div>
           </div>
 
