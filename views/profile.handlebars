@@ -82,9 +82,9 @@
 
           {{!-- 判斷此則 tweet 是否有帳號擁有者 like 過與否 --}}
           {{#if isLiked}}
-          <form action="/tweets/{{this.id}}/unlike" method="POST" class="d-inline-block">
+          <form action="/tweets/{{this.id}}/unlike" method="POST" class="d-inline ml-5">
             <button type="submit" class="tweet-card-icon">
-              <i class="fa fa-heart-o" aria-hidden="true"></i>&nbsp; ({{this.Likes.length}})</i>
+              <i class="fa fa-heart text-danger" aria-hidden="true"></i>&nbsp; ({{this.Likes.length}})</i>
             </button>
           </form>
           {{else}}
