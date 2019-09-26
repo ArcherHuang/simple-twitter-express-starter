@@ -1,0 +1,101 @@
+<h1>tweet後台</h1>
+<br />
+<a href="javascript:history.back()" class="btn btn-primary btn-sm btn-block">Back</a>
+
+
+<div class="row mt-3">
+  <div class="col-md-3">
+    <div class="text-center mt-5">
+      <a href="/users/{{tweet.User.id}}/tweets">
+        <object class="profile-img" data="https://via.placeholder.com/150" type="image/png">
+          <img class="user-img" src="{{tweet.User.avatar}}">
+        </object>
+      </a>
+      <a href="/users/{{tweet.User.id}}">
+        <h3>{{profile.name}}</h3>
+      </a>
+    </div>
+    <p class="text-light">{{tweet.User.introduction}}</p>
+    <br />
+    <div class="aside-menu">
+      <h5>
+        <a class="text-light" href="/users/{{tweet.User.id}}/tweets">Tweets <span
+            class="badge profile-badge">{{profile.Tweets.length}}</span>
+        </a>
+      </h5>
+      <h5>
+        <a class="text-light" href="/users/{{tweet.User.id}}/followings">Following <span
+            class="badge profile-badge">{{profile.Followings.length}}</span>
+        </a>
+      </h5>
+      <h5>
+        <a class="text-light" href="/users/{{tweet.User.id}}/followers">Follower <span
+            class="badge profile-badge">{{profile.Followers.length}}</span>
+        </a>
+      </h5>
+      <h5>
+        <a class="text-light" href="/users/{{tweet.User.id}}/likes">
+          Like
+          <span class="badge profile-badge">{{profile.Likes.length}}</span>
+        </a>
+      </h5>
+    </div>
+    <br />
+  </div>
+  <br />
+
+  {{!-- tweet card --}}
+  <div class="col-md-9 mt-5">
+    <h3>Tweet</h3>
+    <div class="tweet-card rounded p-3">
+      <div class="row">
+        <div class="col-2">
+          <a href="/users/{{tweet.User.id}}/tweets">
+            <object class="user-img" data="https://via.placeholder.com/50" type="image/png">
+              <img class="user-img" src="{{tweet.User.avatar}}">
+            </object>
+          </a>
+        </div>
+        <div class="col-10">
+          <h6><a href="/users/{{tweet.User.id}}/tweets">@{{tweet.User.name}}, </a>
+            <span class="time-text">{{moment tweet.updatedAt}}</span></h6>
+
+          <p class="text-light">{{tweet.description}}</p>
+
+          <span>
+            <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp; {{tweet.numOfReplies}}
+          </span>
+
+          {{#if tweet.isLiked}}
+          <i class="fa fa-heart text-danger" aria-hidden="true"></i>&nbsp; {{tweet.numOfLikes}}
+          {{else}}
+          <i class="fa fa-heart-o" aria-hidden="true"></i>&nbsp; {{tweet.numOfLikes}}
+          {{/if}}
+        </div>
+      </div>
+    </div>
+    <br />
+
+    {{!-- replies --}}
+    <h4 class="ml-4">Replies</h4>
+    {{!-- reply card --}}
+    {{#each replies}}
+    <div class="reply-card rounded shadow p-3 m-3">
+      <div class="row">
+        <div class="col-2">
+          <a href="/users/{{this.User.id}}/tweets">
+            <object class="user-img" data="https://via.placeholder.com/50" type="image/png">
+              <img class="user-img" src="{{this.User.avatar}}" width="50px" height="50px">
+            </object>
+          </a>
+        </div>
+        <div class="col-10">
+          <h6><a href="/users/{{this.User.id}}/tweets">@{{this.User.name}}, </a>
+            <span class="time-text">{{moment this.updatedAt}}</span></h6>
+          <p class="text-light">{{this.comment}}</p>
+        </div>
+      </div>
+    </div>
+    {{/each}}
+  </div>
+</div>
