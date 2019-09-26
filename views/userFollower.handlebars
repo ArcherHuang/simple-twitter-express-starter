@@ -48,7 +48,7 @@
 
       {{#if profile.isFollowed }}
       <form action="/followships/{{profile.id}}?_method=DELETE" method="POST" style="display: contents;">
-        <button type="submit" class="btn btn-outline-danger btn-round">UnFollow</button></form>
+        <button type="submit" class="btn btn-outline-danger btn-round">Unfollow</button></form>
       {{else}}
       <form action="/followships" method="POST" style="display: contents;">
         <input type="number" name="id" value="{{profile.id}}" class="d-none">
@@ -61,7 +61,7 @@
 
   {{!-- followers --}}
   <div class="col-md-9 col-12">
-    <h3>Following</h3>
+    <h3>Follower</h3>
     <div class="row">
       {{#each userFollowers}}
       <div class="col-lg-6 col-12 p-2">

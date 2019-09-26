@@ -32,9 +32,7 @@ const tweetController = {
             isFollowed: helpers.getUser(req).Followings.map(d => d.id).includes(user.id),
             // isFollowed: req.user.Followings.map(d => d.id).includes(user.id),
           }))
-          console.log(helpers.getUser(req))
-          console.log(helpers.getUser(req).Followings)
-          users = users.sort((a, b) => b.FollowerCount - a.FollowerCount)
+          users = users.sort((a, b) => b.FollowerCount - a.FollowerCount).slice(0, 10)
           return res.render('tweets', { tweets: data, users: users })
         })
       }
@@ -81,7 +79,8 @@ const tweetController = {
           { model: User, as: "Followings" },
         ]
       }).then(user => {
-        return res.render('replies', { tweet: data, replies: replies, user: user })
+        user['isFollowed'] = user.Followers.map(d => d.id).includes(helpers.getUser(req).id)
+        return res.render('replies', { tweet: data, replies: replies, profile: user })
       })
     })
   },

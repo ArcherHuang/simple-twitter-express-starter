@@ -32,6 +32,7 @@ module.exports = (app, passport) => {
 
   app.get('/admin', authenticatedAdmin, (req, res) => res.redirect('/admin/tweets'))
   app.get('/admin/tweets', authenticatedAdmin, adminController.getTweets)
+  app.get('/admin/tweets/:id/replies', authenticatedAdmin, adminController.getReplies)
   app.delete('/admin/tweets/:id', authenticatedAdmin, adminController.deleteTweet)
   app.get('/admin/users', authenticatedAdmin, adminController.getUsers)
 
@@ -59,4 +60,6 @@ module.exports = (app, passport) => {
   app.post('/followships', userController.addFollowing)
   app.delete('/followships/:followingId', authenticated, userController.removeFollowing)
 
+  // 將其他 routes 導回首頁
+  app.get('/:params', authenticated, (req, res) => res.redirect('/tweets'))
 }
