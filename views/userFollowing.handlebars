@@ -1,78 +1,98 @@
 <div class="row mt-3">
-  <div class="col-md-4 col-12">
-    <div class="w-100"
-      style="background-image: url({{profile.avatar}}); border-radius: 50%; background-repeat: no-repeat; background-position: center; background-size: cover; padding-top: 100%">
+  <div class="col-md-3 mb-5">
+    <div class="text-center mt-5">
+      <a href="/users/{{profile.id}}/tweets">
+        <object class="profile-img" data="https://via.placeholder.com/150" type="image/png">
+          <img class="user-img" src="{{profile.avatar}}">
+        </object>
+      </a>
+      <a href="/users/{{profile.id}}">
+        <h3>{{profile.name}}</h3>
+      </a>
     </div>
-    <h3>{{profile.name}}</h3>
-    <p>{{profile.introduction}}</p>
+    <p class="text-light">{{profile.introduction}}</p>
     <br />
-    <h5>
-      <a href="/users/{{profile.id}}/tweets" class="text-dark">Tweets <span
-          class="badge badge-dark">{{profile.Tweets.length}}</span>
-      </a>
-    </h5>
-    <h5>
-      <a href="/users/{{profile.id}}/followings" class="text-dark">Following <span
-          class="badge badge-dark">{{profile.Followings.length}}</span>
-      </a>
-    </h5>
-    <h5>
-      <a href="/users/{{profile.id}}/followers" class="text-dark">Follower <span
-          class="badge badge-dark">{{profile.Followers.length}}</span>
-      </a>
-    </h5>
-    <h5>
-      <a href="/users/{{profile.id}}/likes" class="text-dark">Like <span
-          class="badge badge-dark">{{profile.LikedTweets.length}}</span>
-      </a>
-    </h5>
+    <div class="aside-menu">
+      <h5>
+        <a class="text-light" href="/users/{{profile.id}}/tweets" class="text-dark">Tweets <span
+            class="badge profile-badge">{{profile.Tweets.length}}</span>
+        </a>
+      </h5>
+      <h5>
+        <a class="text-light" href="/users/{{profile.id}}/followings" class="text-dark">Following <span
+            class="badge profile-badge">{{profile.Followings.length}}</span>
+        </a>
+      </h5>
+      <h5>
+        <a class="text-light" href="/users/{{profile.id}}/followers" class="text-dark">Follower <span
+            class="badge profile-badge">{{profile.Followers.length}}</span>
+        </a>
+      </h5>
+      <h5>
+        <a class="text-light" href="/users/{{profile.id}}/likes" class="text-dark">Like <span
+            class="badge profile-badge">{{profile.LikedTweets.length}}</span>
+        </a>
+      </h5>
+    </div>
     <br />
-    {{#ifCond user.id profile.id}}
-    <a href="/users/{{user.id}}/edit" class="btn btn-primary">Edit Profile</a>
-    {{else}}
-    {{#if profile.isFollowed }}
-    <form action="/followships/{{profile.followshipId}}?_method=DELETE" method="POST" style="display: contents;">
-      <button type="submit" class="btn btn-outline-danger">UnFollow{{profile.followshipId}}</button></form>
-    {{else}}
-    <form action="/followships" method="POST" style="display: contents;">
-      <input type="number" name="followingId" value="{{profile.id}}" class="d-none">
-      <button type="submit" class="btn btn-outline-primary">Follow</button></form>
-    {{/if}}
-    {{/ifCond}}
+    <div class="text-center">
+      {{#ifCond user.id profile.id}}
+      <a href="/users/{{user.id}}/edit" class="btn btn-outline-primary btn-round">Edit Profile</a>
+      {{else}}
+
+      {{#if profile.isFollowed }}
+      <form action="/followships/{{profile.followshipId}}?_method=DELETE" method="POST" style="display: contents;">
+        <button type="submit" class="btn btn-outline-danger btn-round">UnFollow{{profile.followshipId}}</button></form>
+      {{else}}
+      <form action="/followships" method="POST" style="display: contents;">
+        <input type="number" name="followingId" value="{{profile.id}}" class="d-none">
+        <button type="submit" class="btn btn-outline-primary btn-round">Follow</button>
+      </form>
+      {{/if}}
+      {{/ifCond}}
+    </div>
   </div>
+
+  {{!-- following users --}}
   <div class="col-md-8 col-12">
-    <h2>Following</h2>
+    <h1>Following</h1>
     <div class="row">
+      {{!-- user card --}}
       {{#each userFollowings}}
       <div class="col-lg-6 col-12 p-2">
-        <div class="card w-100 shadow-sm mt-1 p-2 item">
+        <div class="following-card w-100 shadow-sm mt-1 p-2 item">
           <div class="row no-gutters">
-            <div class="col-4">
-              <div class="my-1 mx-auto"
-                style="background-image: url({{this.avatar}});;border-radius: 50%; background-repeat: no-repeat;background-position: center;background-size: cover;width: 5em; height: 5em">
-              </div>
+            <div class="col-3 text-center">
+              <object class="profile-img" data="https://via.placeholder.com/50" type="image/png">
+                <img class="user-img" src="{{this.avatar}}">
+              </object>
             </div>
-            <div class="col-8">
-              <a href="/users/{{this.id}}/tweets">@{{this.name}}</a>
+            <div class="col-9">
+              <div class="d-flex justify-content-between">
+                <a href="/users/{{this.id}}/tweets">@{{this.name}}</a>
 
-              <div class="position-relative">
-                <span class="badge badge-dark position-absolute"
-                  style="font-size: 1em; top:-42px;left:147px">{{this.FollowerCount}} 位粉絲</span>
+                <div class="">
+                  <span class="badge following-badge"
+                    style="font-size: 1em; top:-42px;left:147px">{{this.FollowerCount}}
+                    位粉絲</span>
+                </div>
               </div>
-              <div style="height: 4em">{{this.introduction}}</div>
-              <div class="w-100 text-right">
+              <div class="text-light mt-1">
+                {{this.introduction}}
+              </div>
+              <div class="text-right m-1">
                 {{#ifCond this.id ../user.id}}
 
                 {{else}}
                 {{#if this.isFollowed }}
                 <form action="/followships/{{this.followshipId}}?_method=DELETE" method="POST"
                   style="display: contents;">
-                  <button type="submit" class="btn btn-outline-danger">UnFollow</button>
+                  <button type="submit" class="btn btn-outline-danger btn-round">Unfollow</button>
                 </form>
                 {{else}}
                 <form action="/followships" method="POST" style="display: contents;">
                   <input type="number" name="followingId" value="{{this.id}}" class="d-none">
-                  <button type="submit" class="btn btn-outline-primary">Follow</button></form>
+                  <button type="submit" class="btn btn-outline-primary tn-round">Follow</button></form>
                 {{/if}}
                 {{/ifCond}}
               </div>

@@ -33,10 +33,11 @@
       </h5>
     </div>
     <br />
-    {{#ifCond profile.id user.id}}
-    <a href="/users/{{profile.id}}/edit" class="btn btn-primary">Edit Profile</a>
-    {{else}}
-    <div class="text-center">
+    <div class="text-center mb-5">
+      {{#ifCond profile.id user.id}}
+      <a href="/users/{{profile.id}}/edit" class="btn btn-outline-primary btn-round">Edit Profile</a>
+      {{else}}
+
       {{#if isFollowed }}
       <form action="/followships/{{followshipId}}?_method=DELETE" method="POST" style="display: contents;">
         <button type="submit" class="btn btn-outline-danger btn-round">UnFollow</button>
@@ -47,8 +48,8 @@
         <button type="submit" class="btn btn-outline-dark btn-round">Follow</button>
       </form>
       {{/if}}
+      {{/ifCond}}
     </div>
-    {{/ifCond}}
   </div>
 
   {{!-- user card --}}

@@ -164,3 +164,14 @@ h4 {
 .reply-card {
   background-color: #192633;
 }
+
+/* --- following user card --- */
+
+.following-card {
+  border-radius: 10px;
+  background-color: #192633;
+}
+
+.following-badge {
+  background-color: #1ea1f2;
+}
