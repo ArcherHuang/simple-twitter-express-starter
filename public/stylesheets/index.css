@@ -1,22 +1,180 @@
-/*滑鼠移過的效果*/
+/* --- Default  --- */
+body {
+  background-color: #15202b;
+  font-family: 'Archivo', sans-serif;
+}
+
+a {
+  color: #1ea1f2;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+h1,
+h3,
+h4 {
+  font-family: 'Paytone One', sans-serif;
+  color: #fff;
+}
+
+.btn-round {
+  font-family: 'Paytone One', sans-serif;
+  text-align: center;
+  border-radius: 20px;
+  color: #1ea1f2;
+  border: 2px solid #1ea1f2;
+}
+
+.btn-circle {
+  width: 45px;
+  height: 45px;
+  line-height: 45px;
+  text-align: center;
+  padding: 0;
+  border-radius: 50%;
+}
+
+.btn-circle i {
+  position: relative;
+  top: -1px;
+}
+
+.btn-circle-sm {
+  width: 35px;
+  height: 35px;
+  line-height: 35px;
+  font-size: 0.9rem;
+}
+
+.user-img {
+  width: 60px;
+  height: 60px;
+  border-radius: 30px;
+}
+
+.frame {
+  padding: 0;
+  width: 100%;
+}
+
+.time-text {
+  font-size: 10px;
+  color: #9197a3;
+}
 .item:hover {
-  background-color: #FDF5E6;
+  background-color: #182531;
 }
 
-/* tweets 頁面的 CSS */
-.card {
-  border: 1px, solid,black;
-  border-radius: 10px;
+/* --- main. navbar  --- */
+#tweet-navbar {
+  background-color: #223344;
 }
 
-.button-as-link{
-  background: none!important;
+#tweet-navbar > a {
+  color: #fff;
+  font-family: 'Pacifico', cursive;
+}
+
+#tweet-navbar > a > img {
+  width: 25px;
+  margin-bottom: 8px;
+}
+
+.hi {
+  color: #fff;
+}
+
+.navbar-menu {
+  color: #fff;
+}
+
+.dropdown-menu {
+  background-color: #223344;
+}
+
+.dropdown-item {
+  color: #1ea1f2;
+}
+
+/* --- tweets --- */
+.head-title {
+  width: 100%;
+  border: 1px solid #223344;
+  padding: 20px 0 5px 20px;
+}
+
+.comment-label,
+#comment-input {
+  background-color: #15202b;
   border: none;
-  padding: 0!important;
-  color:red;
-  cursor: pointer;
 }
 
-.button-as-link:hover {
-  text-decoration: underline;
+.comment {
+  border: 1px solid #223344;
+  border-bottom: 25px solid #223344;
+}
+
+/* --- tweet card --- */
+.tweet-card {
+  border: 1px solid #223344;
+}
+
+.tweet-card-icon {
+  color: #5480ab;
+  background-color: #15202b;
+  border: none;
+}
+
+/* --- users--- */
+.top-users-title {
+  width: 100%;
+  padding: 20px 0 5px 20px;
+}
+
+.top-users {
+  border-radius: 30px;
+}
+
+.more {
+  color: #1ea1f2;
+  font-weight: bold;
+  background-color: #192633;
+}
+
+/* --- user card --- */
+.user-card {
+  border-bottom: 2px solid #436689;
+  background-color: #192633;
+}
+
+/* --- profile --- */
+.profile-img {
+  border-radius: 50%;
+  background-color: #192633;
+}
+
+.profile-text {
+  color: #1ea1f2;
+}
+
+.profile-badge {
+  background-color: #436689;
+}
+
+/* --- reply card --- */
+.reply-card {
+  background-color: #192633;
+}
+
+/* --- follow user card --- */
+
+.follow-card {
+  border-radius: 10px;
+  background-color: #192633;
+}
+
+.follow-badge {
+  background-color: #1ea1f2;
 }

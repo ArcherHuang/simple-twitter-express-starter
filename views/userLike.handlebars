@@ -1,69 +1,99 @@
 <div class="row mt-3">
-  <div class="col-md-4 col-12">
-    <div class="w-100"
-      style="background-image: url({{profile.avatar}}); border-radius: 50%; background-repeat: no-repeat; background-position: center; background-size: cover; padding-top: 100%">
+  <div class="col-md-4 mb-5">
+    <div class="text-center mt-5">
+      <a href="/users/{{profile.id}}/tweets">
+        <object class="profile-img" data="https://via.placeholder.com/150" type="image/png">
+          <img class="user-img" src="{{profile.avatar}}">
+        </object>
+      </a>
+      <a href="/users/{{profile.id}}">
+        <h3>{{profile.name}}</h3>
+      </a>
     </div>
-    <h3>{{profile.name}}</h3>
-    <p>{{profile.introduction}}</p>
+    <p class="text-light">{{profile.introduction}}</p>
     <br />
-    <h5>
-      <a class="text-dark" href="/users/{{profile.id}}/tweets">Tweets <span
-          class="badge badge-dark">{{profile.Tweets.length}}</span>
-      </a>
-    </h5>
-    <h5>
-      <a class="text-dark" href="/users/{{profile.id}}/followings">Following <span
-          class="badge badge-dark">{{profile.Followings.length}}</span>
-      </a>
-    </h5>
-    <h5>
-      <a class="text-dark" href="/users/{{profile.id}}/followers">Follower <span
-          class="badge badge-dark">{{profile.Followers.length}}</span>
-      </a>
-    </h5>
-    <h5>
-      <a class="text-dark" href="/users/{{profile.id}}/likes">Like <span
-          class="badge badge-dark">{{profile.LikedTweets.length}}</span>
-      </a>
-    </h5>
+    <div class="aside-menu">
+      <h5>
+        <a class="text-light" href="/users/{{profile.id}}/tweets" class="text-dark">Tweets <span
+            class="badge profile-badge">{{profile.Tweets.length}}</span>
+        </a>
+      </h5>
+      <h5>
+        <a class="text-light" href="/users/{{profile.id}}/followings" class="text-dark">Following <span
+            class="badge profile-badge">{{profile.Followings.length}}</span>
+        </a>
+      </h5>
+      <h5>
+        <a class="text-light" href="/users/{{profile.id}}/followers" class="text-dark">Follower <span
+            class="badge profile-badge">{{profile.Followers.length}}</span>
+        </a>
+      </h5>
+      <h5>
+        <a class="text-light" href="/users/{{profile.id}}/likes" class="text-dark">Like <span
+            class="badge profile-badge">{{profile.LikedTweets.length}}</span>
+        </a>
+      </h5>
+    </div>
     <br />
-    {{#ifCond profile.id user.id}}
-    <a href="/users/{{profile.id}}/edit" class="btn btn-primary">Edit Profile</a>
-    {{else}}
-    <div>
+    <div class="text-center">
+      {{#ifCond user.id profile.id}}
+      <a href="/users/{{profile.id}}/edit" class="btn btn-outline-primary btn-round">Edit Profile</a>
+      {{else}}
+
       {{#if isFollowed }}
       <form action="/followships/{{profile.id}}?_method=DELETE" method="POST" style="display: contents;">
-        <button type="submit" class="btn btn-danger">UnFollow</button>
-      </form>
+        <button type="submit" class="btn btn-outline-danger btn-round">UnFollow</button></form>
       {{else}}
       <form action="/followships" method="POST" style="display: contents;">
         <input type="number" name="id" value="{{profile.id}}" class="d-none">
-        {{!-- <input type="number" name="followingId" value="{{profile.id}}" class="d-none"> --}}
-        <button type="submit" class="btn btn-success">Follow</button>
+        <button type="submit" class="btn btn-outline-primary btn-round">Follow</button>
       </form>
       {{/if}}
+      {{/ifCond}}
     </div>
-    {{/ifCond}}
   </div>
 
+  {{!-- liked tweets --}}
   <div class="col-md-8 col-12">
-    <h2>Like</h2>
+    <h3>Like</h3>
     {{#each tweetArray}}
-    <div class="card mb-3 shadow-sm w-100 p-2">
+    <div class="tweet-card shadow p-3 item">
       <div class="row no-gutters">
-        <div class="col-md-2 p-2">
-          <div class="my-1 mx-auto"
-            style="background-image: url({{this.User.avatar}});border-radius: 50%; background-repeat: no-repeat;background-position: center;background-size: cover;width: 5em; height: 5em">
-          </div>
+        <div class="col-2">
+          <object class="user-img" data="https://via.placeholder.com/50" type="image/png">
+            <img class="user-img" src="{{this.User.avatar}}">
+          </object>
         </div>
 
         <div class="col-md-10">
           <a href="/users/{{this.User.id}}/tweets">@{{this.User.name}},</a>
-          <p class="text-primary d-inline-block"> {{moment this.TweetOrder}}</p>
-          <p>{{this.description}}</p>
-          <a href="/tweets/{{this.id}}/replies" class="text-primary pr-2">Reply({{this.Replies.length}})</a>
+          <p class="time-text d-inline-block"> {{moment this.TweetOrder}}</p>
+          <p class="text-light">{{this.description}}</p>
 
-          {{#if isLiked}}
+          <span>
+            <a href="/tweets/{{this.id}}/replies" class="tweet-card-icon">
+              <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp; {{this.Replies.length}}
+            </a>
+          </span>
+
+          {{#if this.isLiked}}
+          <form action="/tweets/{{this.id}}/unlike" method="POST" class="d-inline ml-5">
+            <input type="hidden" name="tweet_id" value="{{this.id}}" />
+            <button type="submit" class="tweet-card-icon">
+              <i class="fa fa-heart text-danger" aria-hidden="true"></i>&nbsp; {{this.Likes.length}}
+            </button>
+          </form>
+          {{else}}
+          <form action="/tweets/{{this.id}}/like" method="POST" class="d-inline ml-5">
+            <input type="hidden" name="tweet_id" value="{{this.id}}" />
+            <button type="submit" class="tweet-card-icon">
+              <i class="fa fa-heart-o" aria-hidden="true"></i>&nbsp; {{this.Likes.length}}
+            </button>
+          </form>
+          {{/if}}
+
+
+          {{!-- {{#if isLiked}}
           <form action="/tweets/{{this.id}}/unlike" method="POST" class="d-inline-block">
             <button type="submit" class="border-0">
               <span class="pr-4 text-danger">like({{this.Likes.length}})</span>
@@ -75,7 +105,7 @@
               <span class="pr-4 text-danger">like({{this.Likes.length}})</span>
             </button>
           </form>
-          {{/if}}
+          {{/if}} --}}
         </div>
       </div>
     </div>

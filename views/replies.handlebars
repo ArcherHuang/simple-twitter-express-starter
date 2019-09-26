@@ -1,91 +1,150 @@
-<div class="container mt-4">
-  <div class="row">
-    <div class="col-3">
+<div class="row mt-3">
+  <div class="col-md-3">
+    <div class="text-center mt-5">
       <a href="/users/{{tweet.User.id}}/tweets">
-        <img class="" src="{{tweet.User.avatar}}" width="100px" height="100px">
+        <object class="profile-img" data="https://via.placeholder.com/150" type="image/png">
+          <img class="user-img" src="{{tweet.User.avatar}}">
+        </object>
       </a>
-      <p>{{tweet.User.introduction}}</p>
-      <h4>{{user.name}}</h4>
-      <h6>Tweets: <span class="badge badge-dark">{{user.Tweets.length}}</span></h6>
-      <h6>Followings: <span class="badge badge-dark">{{user.Followings.length}}</span></h6>
-      <h6>Followers: <span class="badge badge-dark">{{user.Followers.length}}</span></h6>
-      <h6>Likes: <span class="badge badge-dark">{{user.Likes.length}}</span></h6>
+      <a href="/users/{{tweet.User.id}}">
+        <h3>{{user.name}}</h3>
+      </a>
     </div>
-    <div class="col-9">
-      <h4>Tweet</h4>
-      <div class="card border border-secondary rounded-lg p-3 m-3">
-        <div class="row">
-          <div class="col-2">
-            <a href="/users/{{tweet.User.id}}/tweets">
-              <img class="" src="{{tweet.User.avatar}}" width="50px" height="50px">
-            </a>
-          </div>
-          <div class="col-10">
-            <h6><a href="/users/{{tweet.User.id}}/tweets">@{{tweet.User.name}}, </a>
-              <span>{{tweet.updatedAt}}</span></h6>
+    <p class="text-light">{{tweet.User.introduction}}</p>
+    <br />
+    <div class="aside-menu">
+      <h5>
+        <a class="text-light" href="/users/{{tweet.User.id}}/tweets">Tweets <span
+            class="badge profile-badge">{{user.Tweets.length}}</span>
+        </a>
+      </h5>
+      <h5>
+        <a class="text-light" href="/users/{{tweet.User.id}}/followings">Following <span
+            class="badge profile-badge">{{user.Followings.length}}</span>
+        </a>
+      </h5>
+      <h5>
+        <a class="text-light" href="/users/{{tweet.User.id}}/followers">Follower <span
+            class="badge profile-badge">{{user.Followers.length}}</span>
+        </a>
+      </h5>
+      <h5>
+        <a class="text-light" href="/users/{{tweet.User.id}}/likes">
+          Like
+          <span class="badge profile-badge">{{user.Likes.length}}</span>
+        </a>
+      </h5>
+    </div>
 
-            <p>{{tweet.description}}</p>
-            <span><a href="/tweets/{{tweet.id}}/replies">Reply({{tweet.numOfReplies}}) </a></span>
-            {{#if tweet.isLiked}}
-            <form action="/tweets/{{tweet.id}}/unlike" method="POST" class="d-inline">
-              <input type="hidden" name="tweet_id" value="{{tweet.id}}" />
-              <button type="submit" class="button-as-link"> Liked ({{tweet.numOfLikes}})</button>
-            </form>
-            {{else}}
-            <form action="/tweets/{{tweet.id}}/like" method="POST" class="d-inline">
-              <input type="hidden" name="tweet_id" value="{{tweet.id}}" />
-              <button type="submit" class="button-as-link"> Like ({{tweet.numOfLikes}})</button>
-            </form>
-            {{/if}}
+  </div>
 
-            </h6>
-          </div>
+  <br />
+
+  {{!-- tweet card --}}
+  <div class="col-md-9 mt-5">
+    <h3>Tweet</h3>
+    <div class="tweet-card rounded p-3">
+      <div class="row">
+        <div class="col-2">
+          <a href="/users/{{tweet.User.id}}/tweets">
+            <object class="user-img" data="https://via.placeholder.com/50" type="image/png">
+              <img class="user-img" src="{{tweet.User.avatar}}">
+            </object>
+          </a>
         </div>
+        <div class="col-10">
+          <h6><a href="/users/{{tweet.User.id}}/tweets">@{{tweet.User.name}}, </a>
+            <span class="time-text">{{moment tweet.updatedAt}}</span></h6>
 
-      </div>
-      <h4>Replies</h4>
-      {{#each replies}}
-      <div class="card border border-secondary rounded-lg p-3 m-3">
-        <div class="row">
-          <div class="col-2">
-            <a href="/users/{{this.User.id}}/tweets">
-              <img class="" src="{{this.User.avatar}}" width="50px" height="50px">
+          <p class="text-light">{{tweet.description}}</p>
+
+
+          <span>
+            <a href="/tweets/{{tweet.id}}/replies" class="tweet-card-icon">
+              <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp; {{tweet.numOfReplies}}
             </a>
-          </div>
-          <div class="col-10">
-            <h6><a href="/users/{{this.User.id}}/tweets">@{{this.User.name}}, </a>
-              <span>{{this.updatedAt}}</span></h6>
-            <p>{{this.comment}}</p>
-          </div>
+          </span>
+
+          {{#if tweet.isLiked}}
+          <form action="/tweets/{{tweet.id}}/unlike" method="POST" class="d-inline ml-5">
+            <input type="hidden" name="tweet_id" value="{{this.id}}" />
+            <button type="submit" class="tweet-card-icon">
+              <i class="fa fa-heart text-danger" aria-hidden="true"></i>&nbsp; {{tweet.numOfLikes}}
+            </button>
+          </form>
+          {{else}}
+          <form action="/tweets/{{tweet.id}}/like" method="POST" class="d-inline ml-5">
+            <input type="hidden" name="tweet_id" value="{{this.id}}" />
+            <button type="submit" class="tweet-card-icon">
+              <i class="fa fa-heart-o" aria-hidden="true"></i>&nbsp; {{tweet.numOfLikes}}
+            </button>
+          </form>
+          {{/if}}
         </div>
       </div>
-      {{/each}}
-      <div class="p-2 m-2">
-        <form action="/tweets/{{tweet.id}}/replies" method="POST">
-          <div class="form-group">
-            <label for="addNewReply"></label>
-            <textarea class="form-control" id="addNewReply" rows="3" name="newReply"
-              placeholder="Add comment (140 characters)" maxlength="140" required></textarea>
+    </div>
+    <br />
+
+    {{!-- replies --}}
+    <h4 class="ml-4">Replies</h4>
+    {{!-- reply card --}}
+    {{#each replies}}
+    <div class="reply-card rounded shadow p-3 m-3">
+      <div class="row">
+        <div class="col-2">
+          <a href="/users/{{this.User.id}}/tweets">
+            <object class="user-img" data="https://via.placeholder.com/50" type="image/png">
+              <img class="user-img" src="{{this.User.avatar}}" width="50px" height="50px">
+            </object>
+          </a>
+        </div>
+        <div class="col-10">
+          <h6><a href="/users/{{this.User.id}}/tweets">@{{this.User.name}}, </a>
+            <span class="time-text">{{moment this.updatedAt}}</span></h6>
+          <p class="text-light">{{this.comment}}</p>
+        </div>
+      </div>
+    </div>
+    {{/each}}
+
+    <br />
+    <br />
+
+    <div>
+      {{!-- comment --}}
+      <form action="/tweets/{{tweet.id}}/replies" method="POST" class="add-reply">
+        <div class="form-group">
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="comment-label input-group-text d-flex align-items-start">
+                <object class="user-img" data="https://via.placeholder.com/50" type="image/png">
+                  <img class="user-img" src="{{this.User.avatar}}">
+                </object>
+              </span>
+            </div>
+            <textarea class="form-control" id="comment-input" rows="3" name="newReply"
+              placeholder="Add comment ...140 characters" maxlength="140" required></textarea>
             <div class="invalid-feedback feedback">
-              Please enter your comment
+              Please enter your tweet
             </div>
           </div>
+        </div>
+        <div class="submit text-right">
           <input type="hidden" name="userId" value="{{user.id}}" />
-          <button type="submit" class="btn btn-primary mb-2">Reply</button>
-        </form>
-      </div>
+          <button type="submit" class="btn btn-outline-primary btn-round btn-sm mb-3 mr-3">Reply</button>
+        </div>
+      </form>
     </div>
   </div>
 </div>
 
-<script>
-  let addNewReply = document.getElementById('addNewReply')
-  addNewReply.addEventListener('input', displayReplyLength)
 
+<script>
+  let addNewReply = document.getElementById('comment-input')
+  addNewReply.addEventListener('input', displayReplyLength)
   function displayReplyLength(event) {
     let feedback = addNewReply.nextElementSibling
     let replyLength = this.value.length
-
     if (replyLength < 140 && replyLength > 0) {
       feedback.innerHTML = `You have entered ${replyLength} characters, ${140 - replyLength} left`
       feedback.style.display = 'inherit'
