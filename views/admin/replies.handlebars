@@ -62,15 +62,16 @@
 
           <p class="text-light">{{tweet.description}}</p>
 
-          <span>
-            <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp; {{tweet.numOfReplies}}
+          <span class="text-white">
+            <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp; {{tweet.numOfReplies}} &nbsp;
           </span>
-
-          {{#if tweet.isLiked}}
-          <i class="fa fa-heart text-danger" aria-hidden="true"></i>&nbsp; {{tweet.numOfLikes}}
-          {{else}}
-          <i class="fa fa-heart-o" aria-hidden="true"></i>&nbsp; {{tweet.numOfLikes}}
-          {{/if}}
+          <span class="text-white">
+            {{#if tweet.isLiked}}
+            <i class="fa fa-heart text-danger" aria-hidden="true"></i>&nbsp; {{tweet.numOfLikes}}
+            {{else}}
+            <i class="fa fa-heart-o" aria-hidden="true"></i>&nbsp; {{tweet.numOfLikes}}
+            {{/if}}
+          </span>
         </div>
       </div>
     </div>

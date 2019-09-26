@@ -54,14 +54,14 @@
                 </a>
               </span>
               {{#if this.isLiked}}
-              <form action="/tweets/{{this.id}}/unlike" method="POST" class="d-inline ml-5">
+              <form action="/tweets/{{this.id}}/unlike" method="POST" class="d-inline">
                 <input type="hidden" name="tweet_id" value="{{this.id}}" />
                 <button type="submit" class="tweet-card-icon">
                   <i class="fa fa-heart text-danger" aria-hidden="true"></i>&nbsp; {{this.numOfLikes}}
                 </button>
               </form>
               {{else}}
-              <form action="/tweets/{{this.id}}/like" method="POST" class="d-inline ml-5">
+              <form action="/tweets/{{this.id}}/like" method="POST" class="d-inline">
                 <input type="hidden" name="tweet_id" value="{{this.id}}" />
                 <button type="submit" class="tweet-card-icon">
                   <i class="fa fa-heart-o" aria-hidden="true"></i>&nbsp; {{this.numOfLikes}}

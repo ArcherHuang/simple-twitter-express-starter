@@ -78,17 +78,17 @@
           <p class="time-text d-inline-block"> {{moment this.createdAt}}</p>
           <p class="text-light">{{this.description}}</p>
           <a href="/tweets/{{this.id}}/replies" class="tweet-card-icon"><i class="fa fa-comment-o"
-              aria-hidden="true"></i>&nbsp; {{this.Replies.length}}</a>
+              aria-hidden="true"></i>&nbsp; {{this.replies.length}} &nbsp;</a>
 
           {{!-- 判斷此則 tweet 是否有帳號擁有者 like 過與否 --}}
           {{#if isLiked}}
-          <form action="/tweets/{{this.id}}/unlike" method="POST" class="d-inline ml-5">
+          <form action="/tweets/{{this.id}}/unlike" method="POST" class="d-inline">
             <button type="submit" class="tweet-card-icon">
               <i class="fa fa-heart text-danger" aria-hidden="true"></i>&nbsp; ({{this.Likes.length}})</i>
             </button>
           </form>
           {{else}}
-          <form action="/tweets/{{this.id}}/like" method="POST" class="d-inline ml-5">
+          <form action="/tweets/{{this.id}}/like" method="POST" class="d-inline">
             <button type="submit" class="tweet-card-icon">
               <i class="fa fa-heart-o" aria-hidden="true"></i>&nbsp; {{this.Likes.length}}</i>
             </button>
