@@ -32,7 +32,7 @@
       <div class="tweetsContainer frame">
         {{#each tweets}}
         {{!-- tweet card --}}
-        <div class="tweet-card p-3">
+        <div class="tweet-card shadow p-3 item">
           <div class="row">
             <div class="col-2">
               <a href="/users/{{this.User.id}}/tweets">
@@ -84,7 +84,7 @@
       <ul class="top-users list-group">
         {{#each users}}
         {{!-- User card --}}
-        <li class="list-group-item user-card shadow p-3 ml-3">
+        <li class="list-group-item user-card item shadow p-3 ml-3">
           <div class="row">
             <div class="col-3">
               <a href="/users/{{this.id}}/tweets">

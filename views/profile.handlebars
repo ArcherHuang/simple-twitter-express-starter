@@ -33,6 +33,7 @@
       </h5>
     </div>
     <br />
+
     <div class="text-center mb-5">
       {{#ifCond profile.id user.id}}
       <a href="/users/{{profile.id}}/edit" class="btn btn-outline-primary btn-round">Edit Profile</a>
@@ -54,8 +55,9 @@
 
   {{!-- user card --}}
   <div class="col-md-8 col-12">
+    <h3>Tweets</h3>
     {{#each tweetArray}}
-    <div class="tweet-card shadow w-100 p-2">
+    <div class="tweet-card shadow item w-100 p-2">
       <div class="row no-gutters">
         <div class="col-md-2 p-2">
           <object class="user-img" data="https://via.placeholder.com/50" type="image/png">
