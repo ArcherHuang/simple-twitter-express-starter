@@ -102,6 +102,11 @@ h4 {
   color: #1ea1f2;
 }
 
+/* --- Sign up --- */
+.form-signin {
+  max-width: 350px;
+}
+
 /* --- tweets --- */
 .head-title {
   width: 100%;
