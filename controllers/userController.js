@@ -8,6 +8,8 @@ const Reply = db.Reply
 const Like = db.Like
 const Followship = db.Followship
 
+const Sequelize = require('Sequelize')
+const Op = Sequelize.Op
 const imgur = require('imgur-node-api')
 const IMGUR_CLIENT_ID = process.env.IMGUR_CLIENT_ID
 const helpers = require('../_helpers')
@@ -17,7 +19,7 @@ const userController = {
     return res.render('signup')
   },
 
-  signUp: (req, res) => {
+  signUp: (req, res, next) => {
     // confirm password
     if (req.body.passwordCheck !== req.body.password) {
       req.flash('error_messages', '兩次密碼輸入不同！')
@@ -26,32 +28,26 @@ const userController = {
       // confirm unique user
       User.findOne({
         where: {
-          name: req.body.name
+          [Op.or]: [{ name: req.body.name }, { email: req.body.email }]
         }
       }).then((user) => {
         if (user) {
-          req.flash('error_messages', '姓名重複！')
-          return res.redirect('/signup')
-        }
-        User.findOne({
-          where: {
-            email: req.body.email
-          }
-        }).then((user) => {
-          if (user) {
-            req.flash('error_messages', '信箱重複！')
-            return res.redirect('/signup')
+          if (user.name === req.body.name) {
+            req.flash('error_messages', '姓名重複！')
           } else {
-            User.create({
-              name: req.body.name,
-              email: req.body.email,
-              password: bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10), null)
-            }).then((user) => {
-              req.flash('success_messages', '成功註冊帳號！')
-              return res.redirect('/tweets')
-            })
+            req.flash('error_messages', '信箱重複！')
           }
-        })
+          return res.redirect('/signup')
+        } else {
+          User.create({
+            name: req.body.name,
+            email: req.body.email,
+            password: bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10), null)
+          }).then((user) => {
+            req.flash('success_messages', '成功註冊帳號！')
+            return next(null, user)
+          })
+        }
       })
     }
   },
