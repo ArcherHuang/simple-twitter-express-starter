@@ -2,15 +2,8 @@
   <div class="col-md-3 mb-5">
     <div class="text-center mt-5">
       <a href="/users/{{profile.id}}/tweets">
-        {{!-- <object class="profile-img" data="https://via.placeholder.com/150" type="image/png">
-          <img class="user-img" src="{{profile.avatar}}">
-        </object> --}}
-        {{#if profile.avatar }}
-        <img src="{{profile.avatar}}" class="card-img" alt="avatar" style="width: 150px; height: 150px;">
-        {{else}}
-        <object data="https://via.placeholder.com/300" type="image/png" style="width:100%;">
-        </object>
-        {{/if}}
+        <img src="{{profile.avatar}}" onerror="this.src='/images/default-user.jpg';" alt="avatar"
+          class="profile-img shadow mb-2" />
       </a>
       <a href="/users/{{profile.id}}">
         <h3>{{profile.name}}</h3>
@@ -66,12 +59,11 @@
       {{!-- user card --}}
       {{#each userFollowings}}
       <div class="col-lg-6 col-12 p-2">
-        <div class="follow-card w-100 shadow mt-1 p-2 item">
+        <div class="follow-card w-100 shadow mt-1 p-2 user-item">
           <div class="row no-gutters">
             <div class="col-3 text-center">
-              <object class="profile-img" data="https://via.placeholder.com/50" type="image/png">
-                <img class="user-img" src="{{this.avatar}}">
-              </object>
+              <img src="{{this.avatar}}" onerror="this.src='/images/default-user.jpg';" alt="avatar"
+                class="user-img shadow mt-2" />
             </div>
             <div class="col-9">
               <div class="d-flex justify-content-between">
