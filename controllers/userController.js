@@ -24,20 +24,34 @@ const userController = {
       return res.redirect('/signup')
     } else {
       // confirm unique user
-      User.findOne({ where: { email: req.body.email } }).then((user) => {
-        if (user) {
-          req.flash('error_messages', '信箱重複！')
-          return res.redirect('/signup')
-        } else {
-          User.create({
-            name: req.body.name,
-            email: req.body.email,
-            password: bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10), null)
-          }).then((user) => {
-            req.flash('success_messages', '成功註冊帳號！')
-            return res.redirect('/signin')
-          })
+      User.findOne({
+        where: {
+          name: req.body.name
         }
+      }).then((user) => {
+        if (user) {
+          req.flash('error_messages', '姓名重複！')
+          return res.redirect('/signup')
+        }
+        User.findOne({
+          where: {
+            email: req.body.email
+          }
+        }).then((user) => {
+          if (user) {
+            req.flash('error_messages', '信箱重複！')
+            return res.redirect('/signup')
+          } else {
+            User.create({
+              name: req.body.name,
+              email: req.body.email,
+              password: bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10), null)
+            }).then((user) => {
+              req.flash('success_messages', '成功註冊帳號！')
+              return res.redirect('/tweets')
+            })
+          }
+        })
       })
     }
   },
@@ -58,7 +72,6 @@ const userController = {
   },
 
   getUser: (req, res) => {
-
     userService.getUser(req, res, (data) => {
       req.flash('user_count', `data['profile']`)
       res.render('profile', {
@@ -68,20 +81,18 @@ const userController = {
         followshipId: data['followshipId']
       })
     })
-
   },
 
   editUser: (req, res) => {
     if (parseInt(req.params.id) !== helpers.getUser(req).id) {
       return res.redirect(`/users/${helpers.getUser(req).id}/tweets`)
     }
-    return User.findByPk(req.params.id).then(user => {
+    return User.findByPk(req.params.id).then((user) => {
       return res.render('edit', { user })
     })
   },
 
   putUser: (req, res) => {
-
     userService.putUser(req, res, (data) => {
       if (data['status'] === 'error') {
         return res.redirect(data['redirect'])
@@ -90,7 +101,6 @@ const userController = {
         return res.redirect(data['redirect'])
       }
     })
-
   },
 
   getFollowings: async (req, res) => {
@@ -100,11 +110,9 @@ const userController = {
         userFollowings: data['userFollowings']
       })
     })
-
   },
 
   addFollowing: (req, res) => {
-
     userService.addFollowing(req, res, (data) => {
       // return res.redirect('back')
       if (data['status'] === 'fail') {
@@ -113,30 +121,24 @@ const userController = {
         return res.render('userFollowing')
       }
     })
-
   },
 
   removeFollowing: async (req, res) => {
-
     userService.removeFollowing(req, res, (data) => {
       return res.redirect('back')
     })
-
   },
 
   getFollowers: async (req, res) => {
-
     userService.getFollowers(req, res, (data) => {
       return res.render('userFollower', {
         profile: data['profile'],
         userFollowers: data['userFollowers']
       })
     })
-
   },
 
   getLike: (req, res) => {
-
     userService.getLike(req, res, (data) => {
       res.render('userLike', {
         profile: data['profile'],
@@ -145,9 +147,7 @@ const userController = {
         tweetArray: data['tweetArray']
       })
     })
-
   }
-
 }
 
 module.exports = userController
