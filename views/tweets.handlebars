@@ -94,7 +94,11 @@
               <h6><a href="/users/{{this.id}}/tweets">@{{this.name}}</a></h6>
               <p class="text-light">{{this.introduction}}</p>
               <div class="follow text-right">
-                {{#if this.isFollowed }}
+                {{#ifCond this.id ../user.id}}
+                <div>hi</div>
+                {{else}}
+
+                {{#if this.isFollowed}}
                 <form action="/followships/{{this.id}}?_method=DELETE" method="POST" style="display: contents;">
                   <button type="submit" class="btn btn-outline-danger btn-round btn-sm">
                     Unfollow
@@ -108,6 +112,7 @@
                   </button>
                 </form>
                 {{/if}}
+                {{/ifCond}}
               </div>
             </div>
           </div>
