@@ -76,13 +76,13 @@
 
     <div class="col-md-5 frame">
       {{!-- Top Users --}}
-      <div class="top-users-title ml-2">
-        <h3>Who to follow</h3>
-      </div>
-      <ul class="top-users list-group">
+      <ul class="list-group top-users mt-5">
+        <li class="list-group-item top-title user-item shadow p-3 ml-3">
+          <h3>Who to follow</h3>
+        </li>
         {{#each users}}
         {{!-- User card --}}
-        <li class="list-group-item user-card item shadow p-3 ml-3">
+        <li class="list-group-item user-card user-item shadow p-3 ml-3">
           <div class="row">
             <div class="col-3 d-flex justify-content-center">
               <a href="/users/{{this.id}}/tweets">
@@ -113,7 +113,7 @@
           </div>
         </li>
         {{/each}}
-        <li class="list-group-item more ml-3">no more</li>
+        <li class="list-group-item more user-item shadow p-3 ml-3">no more</li>
       </ul>
     </div>
   </div>

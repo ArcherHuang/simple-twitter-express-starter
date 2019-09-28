@@ -131,20 +131,25 @@ h4 {
   border: none;
 }
 
-/* --- users--- */
-.top-users-title {
+/* --- top users--- */
+.top-title {
   width: 100%;
-  padding: 20px 0 5px 20px;
+  border-radius: 25px 25px 0 0 !important;
+  border-bottom: 2px solid #436689;
+  background-color: #192633;
 }
 
-.top-users {
-  border-radius: 30px;
+.top-title:hover,
+.more:hover {
+  background-color: #192633;
 }
 
 .more {
+  width: 100%;
   color: #1ea1f2;
   font-weight: bold;
   background-color: #192633;
+  border-radius: 0 0 25px 25px !important;
 }
 
 /* --- user card --- */
