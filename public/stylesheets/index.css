@@ -67,6 +67,10 @@ h4 {
   background-color: #182531;
 }
 
+.user-item:hover {
+  background-color: #223344;
+}
+
 /* --- main. navbar  --- */
 #tweet-navbar {
   background-color: #223344;
@@ -152,7 +156,9 @@ h4 {
 
 /* --- profile --- */
 .profile-img {
-  width: 100%;
+  max-width: 100%;
+  width: 200px;
+  height: auto;
   border-radius: 50%;
   background-color: #192633;
 }
