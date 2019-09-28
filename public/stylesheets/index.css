@@ -67,6 +67,10 @@ h4 {
   background-color: #182531;
 }
 
+.user-item:hover {
+  background-color: #223344;
+}
+
 /* --- main. navbar  --- */
 #tweet-navbar {
   background-color: #223344;
@@ -98,6 +102,11 @@ h4 {
   color: #1ea1f2;
 }
 
+/* --- Sign up --- */
+.form-signin {
+  max-width: 350px;
+}
+
 /* --- tweets --- */
 .head-title {
   width: 100%;
@@ -127,30 +136,39 @@ h4 {
   border: none;
 }
 
-/* --- users--- */
-.top-users-title {
+/* --- top users--- */
+.top-title {
   width: 100%;
-  padding: 20px 0 5px 20px;
+  border-radius: 25px 25px 0 0 !important;
+  border-bottom: 2px solid #436689;
+  background-color: #192633;
 }
 
-.top-users {
-  border-radius: 30px;
+.top-title:hover,
+.more:hover {
+  background-color: #192633;
 }
 
 .more {
+  width: 100%;
   color: #1ea1f2;
   font-weight: bold;
   background-color: #192633;
+  border-radius: 0 0 25px 25px !important;
 }
 
 /* --- user card --- */
 .user-card {
+  width: 100%;
   border-bottom: 2px solid #436689;
   background-color: #192633;
 }
 
 /* --- profile --- */
 .profile-img {
+  max-width: 100%;
+  width: 200px;
+  height: auto;
   border-radius: 50%;
   background-color: #192633;
 }

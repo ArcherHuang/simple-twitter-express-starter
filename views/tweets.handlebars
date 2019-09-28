@@ -10,9 +10,8 @@
           <div class="input-group">
             <div class="input-group-prepend">
               <span class="comment-label input-group-text d-flex align-items-start">
-                <object class="user-img" data="https://via.placeholder.com/50" type="image/png">
-                  <img class="user-img" src="{{this.User.avatar}}">
-                </object>
+                <img src="{{user.avatar}}" onerror="this.src='/images/default-user.jpg';" alt="avatar"
+                  class="user-img shadow mt-2" />
               </span>
             </div>
             <textarea class="form-control" id="comment-input" rows="3" name="description"
@@ -34,11 +33,10 @@
         {{!-- tweet card --}}
         <div class="tweet-card shadow p-3 item">
           <div class="row">
-            <div class="col-2">
+            <div class="col-2 d-flex justify-content-center">
               <a href="/users/{{this.User.id}}/tweets">
-                <object class="user-img" data="https://via.placeholder.com/50" type="image/png">
-                  <img class="user-img" src="{{this.User.avatar}}">
-                </object>
+                <img src="{{this.User.avatar}}" onerror="this.src='/images/default-user.jpg';" alt="avatar"
+                  class="user-img shadow mt-2" />
               </a>
             </div>
             <div class="col-10">
@@ -78,26 +76,29 @@
 
     <div class="col-md-5 frame">
       {{!-- Top Users --}}
-      <div class="top-users-title ml-2">
-        <h3>Who to follow</h3>
-      </div>
-      <ul class="top-users list-group">
+      <ul class="list-group top-users mt-5">
+        <li class="list-group-item top-title user-item shadow p-3 ml-3">
+          <h3>Who to follow</h3>
+        </li>
         {{#each users}}
         {{!-- User card --}}
-        <li class="list-group-item user-card item shadow p-3 ml-3">
+        <li class="list-group-item user-card user-item shadow p-3 ml-3">
           <div class="row">
-            <div class="col-3">
+            <div class="col-3 d-flex justify-content-center">
               <a href="/users/{{this.id}}/tweets">
-                <object class="user-img" data="https://via.placeholder.com/50" type="image/png">
-                  <img class="user-img" src="{{his.avatar}}">
-                </object>
+                <img src="{{this.avatar}}" onerror="this.src='/images/default-user.jpg';" alt="avatar"
+                  class="user-img shadow mt-2" />
               </a>
             </div>
             <div class="col-9">
               <h6><a href="/users/{{this.id}}/tweets">@{{this.name}}</a></h6>
               <p class="text-light">{{this.introduction}}</p>
               <div class="follow text-right">
-                {{#if this.isFollowed }}
+                {{#ifCond this.id ../user.id}}
+                <div>hi</div>
+                {{else}}
+
+                {{#if this.isFollowed}}
                 <form action="/followships/{{this.id}}?_method=DELETE" method="POST" style="display: contents;">
                   <button type="submit" class="btn btn-outline-danger btn-round btn-sm">
                     Unfollow
@@ -111,12 +112,13 @@
                   </button>
                 </form>
                 {{/if}}
+                {{/ifCond}}
               </div>
             </div>
           </div>
         </li>
         {{/each}}
-        <li class="list-group-item more ml-3">no more</li>
+        <li class="list-group-item more user-item shadow p-3 ml-3">no more</li>
       </ul>
     </div>
   </div>

@@ -1,18 +1,8 @@
 <div class="row mt-3">
   <div class="col-md-4 col-12">
     <div class="text-center mt-5">
-
-      {{!-- <object class="profile-img" data="https://via.placeholder.com/200" type="image/png">
-        <img class="user-img" src="{{profile.avatar}}">
-      </object> --}}
-
-      {{#if profile.avatar }}
-      <img class="user-img" src="{{profile.avatar}}" style="width: 300px; height: 300px; border-radius: 30px;">
-      {{else}}
-      <object class="profile-img" data="https://via.placeholder.com/200" type="image/png">
-      </object>
-      {{/if}}
-
+      <img src="{{profile.avatar}}" onerror="this.src='/images/default-user.jpg';" alt="avatar"
+        class="profile-img shadow mb-2" />
       <h3>{{profile.name}}</h3>
     </div>
     <p class="text-light">{{profile.introduction}}</p>
@@ -61,16 +51,16 @@
     </div>
   </div>
 
-  {{!-- user card --}}
+  {{!-- tweets --}}
   <div class="col-md-8 col-12">
     <h3>Tweets</h3>
+    {{!-- tweet card --}}
     {{#each tweetArray}}
     <div class="tweet-card shadow item w-100 p-2">
       <div class="row no-gutters">
         <div class="col-md-2 p-2">
-          <object class="user-img" data="https://via.placeholder.com/50" type="image/png">
-            <img class="user-img" src="{{this.User.avatar}}">
-          </object>
+          <img src="{{this.User.avatar}}" onerror="this.src='/images/default-user.jpg';" alt="avatar"
+            class="user-img shadow mt-2" />
         </div>
 
         <div class="col-md-10">
