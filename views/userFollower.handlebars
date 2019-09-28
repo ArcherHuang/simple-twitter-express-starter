@@ -1,9 +1,11 @@
 <div class="row mt-3">
-  <div class="col-md-3 mb-5">
+  <div class="col-md-4 mb-5">
     <div class="text-center mt-5">
       <a href="/users/{{profile.id}}/tweets">
-        <img src="{{profile.avatar}}" onerror="this.src='/images/default-user.jpg';" alt="avatar"
-          class="profile-img shadow mb-2" />
+        <div class="box d-inline">
+          <img src="{{profile.avatar}}" onerror="this.src='/images/default-user.jpg';" alt="avatar"
+            class="profile-img shadow mb-2" />
+        </div>
       </a>
       <a href="/users/{{profile.id}}">
         <h3>{{profile.name}}</h3>
@@ -53,7 +55,7 @@
   </div>
 
   {{!-- followers --}}
-  <div class="col-md-9 col-12">
+  <div class="col-md-8 col-12">
     <h3>Follower</h3>
     <div class="row">
       {{!-- follower card --}}
