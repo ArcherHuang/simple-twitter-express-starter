@@ -2,15 +2,8 @@
   <div class="col-md-4 mb-5">
     <div class="text-center mt-5">
       <a href="/users/{{profile.id}}/tweets">
-        {{!-- <object class="profile-img" data="https://via.placeholder.com/150" type="image/png">
-          <img class="user-img" src="{{profile.avatar}}">
-        </object> --}}
-        {{#if profile.avatar }}
-        <img src="{{profile.avatar}}" class="card-img" alt="avatar" style="width: 150px; height: 150px;">
-        {{else}}
-        <object data="https://via.placeholder.com/300" type="image/png" style="width:100%;">
-        </object>
-        {{/if}}
+        <img src="{{profile.avatar}}" onerror="this.src='/images/default-user.jpg';" alt="avatar"
+          class="profile-img shadow mb-2" />
       </a>
       <a href="/users/{{profile.id}}">
         <h3>{{profile.name}}</h3>
@@ -62,13 +55,13 @@
   {{!-- liked tweets --}}
   <div class="col-md-8 col-12">
     <h3>Like</h3>
+    {{!-- tweet card --}}
     {{#each tweetArray}}
     <div class="tweet-card shadow p-3 item">
       <div class="row no-gutters">
         <div class="col-2">
-          <object class="user-img" data="https://via.placeholder.com/50" type="image/png">
-            <img class="user-img" src="{{this.User.avatar}}">
-          </object>
+          <img src="{{this.User.avatar}}" onerror="this.src='/images/default-user.jpg';" alt="avatar"
+            class="user-img shadow mt-2" />
         </div>
 
         <div class="col-md-10">
