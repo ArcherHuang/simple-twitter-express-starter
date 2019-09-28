@@ -145,6 +145,7 @@ h4 {
 
 /* --- user card --- */
 .user-card {
+  width: 100%;
   border-bottom: 2px solid #436689;
   background-color: #192633;
 }

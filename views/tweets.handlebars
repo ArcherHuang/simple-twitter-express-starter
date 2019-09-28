@@ -10,9 +10,8 @@
           <div class="input-group">
             <div class="input-group-prepend">
               <span class="comment-label input-group-text d-flex align-items-start">
-                <object class="user-img" data="https://via.placeholder.com/50" type="image/png">
-                  <img class="user-img" src="{{this.User.avatar}}">
-                </object>
+                <img src="{{user.avatar}}" onerror="this.src='/images/default-user.jpg';" alt="avatar"
+                  class="user-img shadow mt-2" />
               </span>
             </div>
             <textarea class="form-control" id="comment-input" rows="3" name="description"
@@ -34,11 +33,10 @@
         {{!-- tweet card --}}
         <div class="tweet-card shadow p-3 item">
           <div class="row">
-            <div class="col-2">
+            <div class="col-2 d-flex justify-content-center">
               <a href="/users/{{this.User.id}}/tweets">
-                <object class="user-img" data="https://via.placeholder.com/50" type="image/png">
-                  <img class="user-img" src="{{this.User.avatar}}">
-                </object>
+                <img src="{{this.User.avatar}}" onerror="this.src='/images/default-user.jpg';" alt="avatar"
+                  class="user-img shadow mt-2" />
               </a>
             </div>
             <div class="col-10">
@@ -86,11 +84,10 @@
         {{!-- User card --}}
         <li class="list-group-item user-card item shadow p-3 ml-3">
           <div class="row">
-            <div class="col-3">
+            <div class="col-3 d-flex justify-content-center">
               <a href="/users/{{this.id}}/tweets">
-                <object class="user-img" data="https://via.placeholder.com/50" type="image/png">
-                  <img class="user-img" src="{{his.avatar}}">
-                </object>
+                <img src="{{this.avatar}}" onerror="this.src='/images/default-user.jpg';" alt="avatar"
+                  class="user-img shadow mt-2" />
               </a>
             </div>
             <div class="col-9">
