@@ -8,7 +8,7 @@ const Reply = db.Reply
 const Like = db.Like
 const Followship = db.Followship
 
-const Sequelize = require('Sequelize')
+const Sequelize = require('sequelize')
 const Op = Sequelize.Op
 const imgur = require('imgur-node-api')
 const IMGUR_CLIENT_ID = process.env.IMGUR_CLIENT_ID
