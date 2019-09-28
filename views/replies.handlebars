@@ -2,9 +2,8 @@
   <div class="col-md-3">
     <div class="text-center mt-5">
       <a href="/users/{{tweet.User.id}}/tweets">
-        <object class="profile-img" data="https://via.placeholder.com/150" type="image/png">
-          <img class="user-img" src="{{tweet.User.avatar}}">
-        </object>
+        <img src="{{tweet.User.avatar}}" onerror="this.src='/images/default-user.jpg';" alt="avatar"
+          class="profile-img shadow mb-2" />
       </a>
       <a href="/users/{{tweet.User.id}}">
         <h3>{{profile.name}}</h3>
@@ -64,9 +63,8 @@
       <div class="row">
         <div class="col-2">
           <a href="/users/{{tweet.User.id}}/tweets">
-            <object class="user-img" data="https://via.placeholder.com/50" type="image/png">
-              <img class="user-img" src="{{tweet.User.avatar}}">
-            </object>
+            <img src="{{tweet.User.avatar}}" onerror="this.src='/images/default-user.jpg';" alt="avatar"
+              class="user-img shadow mt-2" />
           </a>
         </div>
         <div class="col-10">
@@ -110,9 +108,8 @@
       <div class="row">
         <div class="col-2">
           <a href="/users/{{this.User.id}}/tweets">
-            <object class="user-img" data="https://via.placeholder.com/50" type="image/png">
-              <img class="user-img" src="{{this.User.avatar}}" width="50px" height="50px">
-            </object>
+            <img src="{{this.User.avatar}}" onerror="this.src='/images/default-user.jpg';" alt="avatar"
+              class="user-img shadow mt-2" />
           </a>
         </div>
         <div class="col-10">
@@ -134,18 +131,20 @@
           <div class="input-group">
             <div class="input-group-prepend">
               <span class="comment-label input-group-text d-flex align-items-start">
-                <object class="user-img" data="https://via.placeholder.com/50" type="image/png">
-                  <img class="user-img" src="{{this.User.avatar}}">
-                </object>
+                <a href="/users/{{tweet.User.id}}/tweets">
+                  <img src="{{user.avatar}}" onerror="this.src='/images/default-user.jpg';" alt="avatar"
+                    class="user-img shadow mt-2" />
+                </a>
               </span>
             </div>
             <textarea class="form-control" id="comment-input" rows="3" name="newReply"
               placeholder="Add comment ...140 characters" maxlength="140" required></textarea>
             <div class="invalid-feedback feedback">
-              Please enter your tweet
+              Please enter your comment
             </div>
           </div>
         </div>
+        {{!-- submit --}}
         <div class="submit text-right">
           <input type="hidden" name="userId" value="{{user.id}}" />
           <button type="submit" class="btn btn-outline-primary btn-round btn-sm mb-3 mr-3">Reply</button>
