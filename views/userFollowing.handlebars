@@ -4,7 +4,7 @@
       <a href="/users/{{profile.id}}/tweets">
         <div class="box d-inline">
           <img src="{{profile.avatar}}" onerror="this.src='/images/default-user.jpg';" alt="avatar"
-            class="profile-img shadow mb-2" />
+            class="profile-img shadow mb-2 border" />
         </div>
       </a>
       <a href="/users/{{profile.id}}">
@@ -60,8 +60,8 @@
     <div class="row">
       {{!-- user card --}}
       {{#each userFollowings}}
-      <div class="col-lg-6 col-12 p-2">
-        <div class="follow-card w-100 shadow mt-1 p-2 user-item">
+      <div class="col-lg-6 col-12">
+        <div class="follow-card w-100 shadow mt-1 user-item">
           <div class="row no-gutters">
             <div class="col-3 text-center">
               <img src="{{this.avatar}}" onerror="this.src='/images/default-user.jpg';" alt="avatar"
@@ -70,8 +70,9 @@
             <div class="col-9">
               <div class="d-flex justify-content-between">
                 <a href="/users/{{this.id}}/tweets">@{{this.name}}</a>
-                <span class="badge follow-badge" style="font-size: 1em; top:-42px;left:147px">{{this.FollowerCount}}
-                  位粉絲</span>
+                <span class="btn follow-badge btn-sm">
+                  Follower <i class="badge badge-light">{{this.FollowerCount}}</i>
+                </span>
               </div>
               <div class="text-light mt-1">
                 {{this.introduction}}

@@ -4,7 +4,7 @@
       <a href="/users/{{profile.id}}/tweets">
         <div class="box d-inline">
           <img src="{{profile.avatar}}" onerror="this.src='/images/default-user.jpg';" alt="avatar"
-            class="profile-img shadow mb-2" />
+            class="profile-img shadow border mb-2" />
         </div>
       </a>
       <a href="/users/{{profile.id}}">
@@ -59,11 +59,11 @@
     <h3>Like</h3>
     {{!-- tweet card --}}
     {{#each tweetArray}}
-    <div class="tweet-card shadow p-3 item">
+    <div class="tweet-card shadow item  p-2">
       <div class="row no-gutters">
-        <div class="col-2">
+        <div class="col-2 text-center">
           <img src="{{this.User.avatar}}" onerror="this.src='/images/default-user.jpg';" alt="avatar"
-            class="user-img shadow mt-2" />
+            class="user-img shadow mt-1" />
         </div>
 
         <div class="col-md-10">
@@ -92,21 +92,6 @@
             </button>
           </form>
           {{/if}}
-
-
-          {{!-- {{#if isLiked}}
-          <form action="/tweets/{{this.id}}/unlike" method="POST" class="d-inline-block">
-            <button type="submit" class="border-0">
-              <span class="pr-4 text-danger">like({{this.Likes.length}})</span>
-            </button>
-          </form>
-          {{else}}
-          <form action="/tweets/{{this.id}}/like" method="POST" class="d-inline-block">
-            <button type="submit" class="border-0">
-              <span class="pr-4 text-danger">like({{this.Likes.length}})</span>
-            </button>
-          </form>
-          {{/if}} --}}
         </div>
       </div>
     </div>
