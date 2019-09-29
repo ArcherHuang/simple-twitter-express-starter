@@ -48,12 +48,6 @@ h4 {
   font-size: 0.9rem;
 }
 
-.user-img {
-  width: 60px;
-  height: 60px;
-  border-radius: 30px;
-}
-
 .frame {
   padding: 0;
   width: 100%;
@@ -164,6 +158,13 @@ h4 {
   background-color: #192633;
 }
 
+.user-img {
+  width: 60px;
+  height: 60px;
+  border-radius: 30px;
+  object-fit: cover;
+}
+
 /* --- profile --- */
 .box {
   width: 200px;
@@ -199,5 +200,6 @@ h4 {
 }
 
 .follow-badge {
+  margin-top: -5px;
   background-color: #1ea1f2;
 }
